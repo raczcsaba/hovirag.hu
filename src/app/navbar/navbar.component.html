@@ -1,6 +1,10 @@
-<div class="navbar">
-  <a class="navitem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</a>
+<div class="container">
+  <img src="../../assets/img/tophot.jpg" #toppic style="width: 100%">
+  <div class="navbar" (scroll)="onscroll()" [ngClass]="navbarfixed?'fixed':'nofixed'">
+    <a class="navitem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</a>
+  </div>
 </div>
+
 <div>
   <router-outlet></router-outlet>
 </div>

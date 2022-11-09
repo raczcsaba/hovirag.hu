@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 
 interface navbar {
   url: string;
@@ -28,11 +28,18 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isSticky: boolean = false;
-
-  @HostListener('window:scroll', ['$event'])
-  checkScroll() {
-    this.isSticky = window.pageYOffset >= 250;
-    console.log(this.isSticky + " " + window.pageYOffset)
+  navbarfixed:boolean = false;
+  @ViewChild('toppic')toppic: any; //Elementreffet nemértem :(
+  height:number=10;
+  @HostListener('window:scroll',['$event']) onscroll(){
+    this.height = this.toppic.nativeElement.offsetHeight * 0.8
+    if(window.scrollY > this.height)
+    {
+      this.navbarfixed = true;
+    }
+    else
+    {
+      this.navbarfixed = false;
+    }
   }
 }
