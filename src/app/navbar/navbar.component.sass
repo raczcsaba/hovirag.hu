@@ -1,29 +1,68 @@
-.container
+.imgpic
   position: relative
-.navbar
+.navibar
   width: 100%
   display: flex
   flex-wrap: wrap
-  justify-content: center
+  align-content: center
+  align-items: stretch
+  background-color: cadetblue
 
-.navitem
+
+.navibaritem
   color: black
   font-size: 1.5rem
   padding: 1.5rem
   text-align: center
   background-color: cadetblue
 
-.navitem:hover
+.navibaritem:hover
   background-color: aquamarine
-
-.fixed
+@media only screen and (min-width: 1280px)
+  .fixed
     position: fixed
     top: 0px
-    background-color: cadetblue
 
+  .nofixed
+    position: absolute
+    top: 50%
+    left: 10%
+    width: 80%
 
-.nofixed
-  position: absolute
-  top: 80%
-  left: 0
+.navitoggler
+  display: none
+  background: none
+  border: none
+.rollbar
+  display: none
+.rollbarshow
+  position: fixed
+  top: 89px
+  display: flex
+  flex-flow: column
+  align-content: flex-start
+.rollbaritem
+  flex: 12
+  color: black
+  font-size: 1.5rem
+  padding: 1.5rem
+  text-align: center
+  background-color: cadetblue
+.rollbaritem:hover
+  background-color: aquamarine
+@media only screen and (max-width: 1279px)
+  #top
+    display: none
+  .navibar
+    width: 100%
+    position: fixed
+    top: 0
+    justify-content: flex-start
+  .navibaritem
+    display: none
+  .navitoggler
+    display: block
+  .main
+    margin-top: 100px
+
 

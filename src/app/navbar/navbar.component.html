@@ -1,10 +1,19 @@
-<div class="container">
-  <img src="../../assets/img/tophot.jpg" #toppic style="width: 100%">
-  <div class="navbar" (scroll)="onscroll()" [ngClass]="navbarfixed?'fixed':'nofixed'">
-    <a class="navitem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</a>
+<div class="imgpic">
+  <img src="../../assets/img/tophot.jpg" #toppic id="top" style="width: 100%">
+  <div class="navibar" (scroll)="onscroll()" [ngClass]="navbarfixed?'fixed':'nofixed'">
+    <button class="navitoggler" (click)="toggleNavbar()" type="button">
+      <img src="../../assets/img/logo_vonalas.png" height="87px">
+    </button>
+    <img src="../../assets/img/logofel.png" class="navibaritem" height="87px" style="padding: 0!important;" routerLink="">
+    <div class="navibaritem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</div>
+    <div [ngClass]="navbarOpen?'rollbarshow':'rollbar'">
+      <div class="rollbaritem" routerLink="">Főoldal</div>
+      <div class="rollbaritem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</div>
+    </div>
   </div>
+
 </div>
 
-<div>
+<div class="main" (click)="alttogle()">
   <router-outlet></router-outlet>
 </div>
