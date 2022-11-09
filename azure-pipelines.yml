@@ -3,7 +3,6 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-
 trigger:
 - master
 
@@ -24,7 +23,7 @@ stages:
         displayName: 'Install Node.js 16.x'
 
       - script: |
-          cd raczcsaba/
+          cd hovirag.hu/
           npm install -g @angular/cli
           npm install
           ng build --prod
