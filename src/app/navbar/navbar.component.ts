@@ -1,4 +1,5 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import { PagecolorService } from  '../pagecolor.service'
 
 interface navbar {
   url: string;
@@ -24,7 +25,7 @@ export class NavbarComponent implements OnInit {
   colors:string[] = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','twentyone','twentytwo','twentythree'];
 
 
-  constructor() { }
+  constructor(public colorService:PagecolorService) { }
 
   ngOnInit(): void {
   }
@@ -63,6 +64,12 @@ export class NavbarComponent implements OnInit {
   }
 
   //klima cuccok
+  setColor(value:number){
+    this.colorService.setColor(value)
+    console.log(this.colorService.getColor())
+
+  }
+
   clima() {
     this.klima = !this.klima;
   }

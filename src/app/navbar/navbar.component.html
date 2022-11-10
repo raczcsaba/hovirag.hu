@@ -1,4 +1,4 @@
-<div [ngClass]="colors[matslider.value-12]" class="seventeen">
+<div [ngClass]="colorService.getColor()" class="seventeen">
   <div class="imgpic">
     <img [src]="matslider.value>20 ? '../../assets/img/tophot.jpg' : '../../assets/img/topcold.jpg'" (click)="alttogle()" #toppic id="top" style="width: 100%">
     <div class="navibar" (scroll)="onscroll()" [ngClass]="navbarfixed?'fixed':'nofixed'">
@@ -13,7 +13,7 @@
       </div>
       <img  (click)="clima()" src="../../assets/img/klima.png" height="87px" style="padding: 0!important; margin-left: auto;">
       <p (click)="clima()" class="homero">{{matslider.value}}</p>
-      <mat-slider [ngClass]="klima?'showac':'hideac'" #matslider min="12" max="34" step="1" value="17"></mat-slider>
+      <mat-slider [ngClass]="klima?'showac':'hideac'" #matslider (input)="setColor(matslider.value)" min="12" max="34" step="1" value="{{colorService.colorValue}}"></mat-slider>
 
     </div>
 
