@@ -66,4 +66,5 @@ export class NavbarComponent implements OnInit {
   clima() {
     this.klima = !this.klima;
   }
+
 }
