@@ -7,6 +7,21 @@
   align-content: center
   align-items: stretch
   background-color: cadetblue
+  border-radius: 25px
+
+.homero
+  position: relative
+  left: -180px
+  top: 25px
+  color: blue
+  $value: ()
+  @for $i from 1 through 4
+    $num: $i * 2 + px
+    $theShadow:0 0 $num cadetblue
+    $value: append($value, $theShadow, comma)
+
+
+  text-shadow: $value
 
 
 .navibaritem
@@ -15,6 +30,7 @@
   padding: 1.5rem
   text-align: center
   background-color: cadetblue
+  border-radius: 25px
 
 .navibaritem:hover
   background-color: aquamarine
@@ -22,12 +38,13 @@
   .fixed
     position: fixed
     top: 0px
+    border-radius: 0px
 
   .nofixed
     position: absolute
     top: 50%
-    left: 10%
-    width: 80%
+    left: 2%
+    width: 96%
 
 .navitoggler
   display: none
@@ -58,11 +75,21 @@
     position: fixed
     top: 0
     justify-content: flex-start
+    border-radius: 0
   .navibaritem
     display: none
   .navitoggler
     display: block
   .main
-    margin-top: 100px
+    margin-top: 89px
+
+.showac
+  position: absolute
+  top: 20px
+  right: 35px
+  color: cadetblue
+
+.hideac
+  display: none
 
 

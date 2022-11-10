@@ -9,6 +9,9 @@ import { HutestechnikaComponent } from './hutestechnika/hutestechnika.component'
 import { KapcsolatComponent } from './kapcsolat/kapcsolat.component';
 import { KlimatechnikaComponent } from './klimatechnika/klimatechnika.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

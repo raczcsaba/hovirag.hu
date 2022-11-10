@@ -1,19 +1,27 @@
-<div class="imgpic">
-  <img src="../../assets/img/tophot.jpg" #toppic id="top" style="width: 100%">
-  <div class="navibar" (scroll)="onscroll()" [ngClass]="navbarfixed?'fixed':'nofixed'">
-    <button class="navitoggler" (click)="toggleNavbar()" type="button">
-      <img src="../../assets/img/logo_vonalas.png" height="87px">
-    </button>
-    <img src="../../assets/img/logofel.png" class="navibaritem" height="87px" style="padding: 0!important;" routerLink="">
-    <div class="navibaritem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</div>
-    <div [ngClass]="navbarOpen?'rollbarshow':'rollbar'">
-      <div class="rollbaritem" routerLink="">Főoldal</div>
-      <div class="rollbaritem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</div>
+<div [ngClass]="colors[matslider.value-12]" class="seventeen">
+  <div class="imgpic">
+    <img *ngIf="matslider.value>20" src="../../assets/img/tophot.jpg" (click)="alttogle()" style="width: 100%">
+    <img *ngIf="matslider.value<21" src="../../assets/img/topcold.jpg" (click)="alttogle()" #toppic id="top" style="width: 100%">
+
+    <div class="navibar" (scroll)="onscroll()" [ngClass]="navbarfixed?'fixed':'nofixed'">
+      <button class="navitoggler" (click)="toggleNavbar()" type="button">
+        <img src="../../assets/img/logo_vonalas.png" height="87px">
+      </button>
+      <img src="../../assets/img/logofel.png" class="navibaritem" height="87px" style="padding: 0!important;" routerLink="">
+      <div class="navibaritem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</div>
+      <div [ngClass]="navbarOpen?'rollbarshow':'rollbar'">
+        <div class="rollbaritem" routerLink="">Főoldal</div>
+        <div class="rollbaritem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS">{{nav.title}}</div>
+      </div>
+      <img  (click)="clima()" src="../../assets/img/klima.png" height="87px" style="padding: 0!important; margin-left: auto;">
+      <p (click)="clima()" class="homero">{{matslider.value}}</p>
+      <mat-slider [ngClass]="klima?'showac':'hideac'" #matslider  min="12" max="34" step="1" value="17"></mat-slider>
+
     </div>
+
   </div>
 
-</div>
-
-<div class="main" (click)="alttogle()">
-  <router-outlet></router-outlet>
+  <div class="main" (click)="alttogle()">
+    <router-outlet></router-outlet>
+  </div>
 </div>

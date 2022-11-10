@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit {
     { url: '/hutestechnika', title: 'Hűtéstechnika' },
     { url: '/kapcsolat', title: 'Kapcsolat' },
   ]
+  colors:string[] = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','twentyone','twentytwo','twentythree'];
+
 
   constructor() { }
 
@@ -45,14 +47,23 @@ export class NavbarComponent implements OnInit {
 
   //responsive cuccok
   navbarOpen = false;
+  klima = false
+
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
+    this.klima = false;
   }
 
   alttogle() {
+    this.klima = false;
     if (this.navbarOpen) {
       this.navbarOpen = false;
     }
+  }
+
+  //klima cuccok
+  clima() {
+    this.klima = !this.klima;
   }
 }
