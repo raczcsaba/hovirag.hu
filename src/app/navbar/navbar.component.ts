@@ -26,8 +26,14 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(public colorService:PagecolorService) { }
+  @ViewChild('matslider')slider:any;
 
   ngOnInit(): void {
+    this.colorService.start();
+    setTimeout(() => {
+      this.slider.value = this.colorService.colorValue
+    },0)
+
   }
 
   //navcuccok
@@ -66,7 +72,6 @@ export class NavbarComponent implements OnInit {
   //klima cuccok
   setColor(value:number){
     this.colorService.setColor(value)
-    console.log(this.colorService.getColor())
 
   }
 
