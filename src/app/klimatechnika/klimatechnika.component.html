@@ -1,1 +1,14 @@
-<p>klimatechnika works!</p>
+<mat-card behind *ngFor="let data of mydata" class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{data.title}}</mat-card-title>
+  </mat-card-header>
+  <img *ngFor="let pic of data.pictures" mat-card-image src="{{pic.normal}}" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{data.description}}
+    </p>
+    <mat-chip-list aria-label="Fish selection">
+      <mat-chip color="primary" selected>{{data.category}}</mat-chip>
+    </mat-chip-list>
+  </mat-card-content>
+</mat-card>

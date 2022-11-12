@@ -12,6 +12,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
+import {MatCardModule} from '@angular/material/card';
+
+import {MatChipsModule} from '@angular/material/chips';
+
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
@@ -29,7 +33,9 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatCardModule,
+    MatChipsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
