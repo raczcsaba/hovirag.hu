@@ -6,9 +6,11 @@
   flex-wrap: wrap
   align-content: center
   align-items: stretch
-  background-color: cadetblue
   border-radius: 25px
   z-index: 4
+  background-image: url("../../assets/img/navbg.jpg")
+  background-blend-mode: screen
+
 
 
 .homero
@@ -27,16 +29,15 @@
 
 
 .navibaritem
-  color: black
+  color: bisque
   font-size: 1.5rem
   padding: 1.5rem
   text-align: center
-  background-color: cadetblue
   border-radius: 25px
 
 .navibaritem:hover
-  background-color: aquamarine
-@media only screen and (min-width: 1280px)
+  background-color: rgba(255, 255, 255, 0.5)
+@media only screen and (min-width: 1295px)
   .fixed
     position: fixed
     top: 0px
@@ -44,7 +45,7 @@
 
   .nofixed
     position: absolute
-    top: 50%
+    top: 70%
     left: 2%
     width: 96%
 
@@ -62,14 +63,13 @@
   align-content: flex-start
 .rollbaritem
   flex: 12
-  color: black
+  color: bisque
   font-size: 1.5rem
   padding: 1.5rem
   text-align: center
-  background-color: cadetblue
 .rollbaritem:hover
-  background-color: aquamarine
-@media only screen and (max-width: 1279px)
+  background-color: rgba(255, 255, 255, 0.5)
+@media only screen and (max-width: 1294px)
   #top
     display: none
   .navibar
@@ -94,4 +94,5 @@
 .hideac
   display: none
 
-
+.main
+  background-size: cover

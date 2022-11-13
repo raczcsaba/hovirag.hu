@@ -1,10 +1,13 @@
-.card
+.mycard
   z-index: 0
   height: 100%
+  width: 100%
+  background-color: rgba(0, 0, 0, 0.7)
+  color: bisque
 
 .cont
-  padding: 30px
-  width: 70%
+  padding-top: 30px
+  width: 80%
   margin: auto
   display: flex
   flex-wrap: wrap
@@ -14,17 +17,31 @@
   gap: 20px 20px
 
 .item
-  flex: 1 0 350px
+  flex: 3
+  max-width: 400px
 
-.bord
-  display: inline-block
-  height: 300px
-  position: relative
-
+.carddescrip
+  margin: 10px 0px
 
 img
-  max-height: 300px
+  max-width: 300px
   width: auto
-  height: auto
   border: 0
   margin: auto
+  background-image: url("http://localhost:1337/uploads/medium_tapai3_35a176febf.jpg")
+.chip
+  display: inline-block
+  padding: 0 25px
+  height: 50px
+  font-size: 16px
+  line-height: 50px
+  border-radius: 25px
+.chipcont
+  height: 15%
+  display: flex
+  align-items: flex-end
+  padding: 20px 0
+.cardcont
+  height: 85%
+
+

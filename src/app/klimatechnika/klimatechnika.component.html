@@ -1,34 +1,22 @@
-<div class="cont">
+<div *ngIf="!nodata" class="cont">
   <div *ngFor="let data of mydata; index as i" class="item">
-    <mat-card class="example-card">
-      <mat-card-header>
+    <mat-card class="mycard" [ngClass]="colorservice.getColor(true)">
+      <mat-card-content class="cardcont">
         <mat-card-title>{{data.title}}</mat-card-title>
-      </mat-card-header>
-      <div id="carouselControls{{i}}" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div *ngFor="let pic of data.pictures" class="carousel-item active">
-            <span class="bord">
-              <img src="{{pic.normal}}" class="d-block w-100" alt="...">
-            </span>
+
+        <div class="bord">
+            <img class="img" [src]="getpic(data.pictures)">
           </div>
-        </div>
-        <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselControls'+i" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselControls'+i" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-      <mat-card-content>
-        <p>
+        <p class="carddescrip">
           {{data.description}}
         </p>
-        <mat-chip-list aria-label="Fish selection">
-          <mat-chip color="primary" selected>{{data.category}}</mat-chip>
-        </mat-chip-list>
+
       </mat-card-content>
+      <div class="chipcont">
+        <div class="chip" [ngClass]="colorservice.getColor()">
+          {{data.category}}
+        </div>
+      </div>
     </mat-card>
   </div>
 </div>

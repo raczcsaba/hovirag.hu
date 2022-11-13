@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetDataService } from  '../get-data.service'
-import { data } from '../datainterface'
+import {data, kep} from '../datainterface'
+import { PagecolorService } from  '../pagecolor.service'
 
 
 @Component({
@@ -12,12 +13,23 @@ import { data } from '../datainterface'
 
 export class KlimatechnikaComponent implements OnInit {
   mydata?: data[] = [];
-
-  constructor(public dataservice:GetDataService) { }
+  nodata:boolean = false;
+  constructor(public dataservice:GetDataService, public colorservice:PagecolorService) { }
 
   ngOnInit(): void {
-    this.dataservice.getData().then((dat) => this.mydata = this.dataservice.sortData(dat))
+    this.dataservice.getData().then((dat) => {
+      if(typeof dat != "undefined") {
+        this.mydata = this.dataservice.sortData(dat)
+      }else{ this.nodata = true}
+    })
+  };
 
+  //mycaraousel
+  getpic(pic:kep[] | undefined) {
+    if (typeof pic != 'undefined'){
+      return pic[0].normal;
+    }
+
+    return "http://localhost:1337/uploads/medium_tapai3_35a176febf.jpg";
   }
-
 }

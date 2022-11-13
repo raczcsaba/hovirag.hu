@@ -18,8 +18,14 @@ export class PagecolorService {
       this.colorValue=Number(this.cookieService.get('color'));
     }
   }
-  getColor() {
-    return colors[this.colorValue-12];
+  getColor(light?:boolean) {
+    if (light==true){
+      if (this.colorValue>25)return 'hot'
+      else if (this.colorValue>20) return 'mild'
+      else return 'cold'
+    }else {
+      return colors[this.colorValue - 12];
+    }
   }
 
   setColor(color:number) {

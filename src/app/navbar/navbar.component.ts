@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
   @ViewChild('toppic')toppic: any; //Elementreffet nemértem :(
   height:number=10;
   @HostListener('window:scroll',['$event']) onscroll(){
-    this.height = this.toppic.nativeElement.offsetHeight * 0.5
+    this.height = this.toppic.nativeElement.offsetHeight * 0.7
     if(window.scrollY > this.height)
     {
       this.navbarfixed = true;
@@ -79,4 +79,10 @@ export class NavbarComponent implements OnInit {
     this.klima = !this.klima;
   }
 
+  getbg(value: number) {
+    if(value>20){
+      return 'url("../../assets/img/bghot.png")'
+    }
+    return "url('../../assets/img/bgcold.png')"
+  }
 }
