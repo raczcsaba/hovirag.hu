@@ -1,5 +1,5 @@
 <div *ngIf="!nodata" class="cont">
-  <div *ngFor="let data of mydata; index as i" class="item">
+  <div *ngFor="let data of mydata; index as i" class="item" [ngClass]="data.category == type?'':'hide'">
     <mat-card class="mycard" [ngClass]="colorservice.getColor(true)">
       <mat-card-content class="cardcont">
         <mat-card-title>{{data.title}}</mat-card-title>
@@ -20,4 +20,4 @@
     </mat-card>
   </div>
 </div>
-
+<app-error *ngIf="nodata"></app-error>

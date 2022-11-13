@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HutestechnikaComponent } from './hutestechnika.component';
+import { ErrorComponent } from './error.component';
 
 describe('HutestechnikaComponent', () => {
-  let component: HutestechnikaComponent;
-  let fixture: ComponentFixture<HutestechnikaComponent>;
+  let component: ErrorComponent;
+  let fixture: ComponentFixture<ErrorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HutestechnikaComponent ]
+      declarations: [ ErrorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HutestechnikaComponent);
+    fixture = TestBed.createComponent(ErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

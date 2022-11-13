@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { EnergetikaiComponent } from './energetikai/energetikai.component';
-import { HutestechnikaComponent } from './hutestechnika/hutestechnika.component';
+import { ErrorComponent } from './error/error.component';
 import { KapcsolatComponent } from './kapcsolat/kapcsolat.component';
 import { KlimatechnikaComponent } from './klimatechnika/klimatechnika.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -23,7 +23,7 @@ import { CookieService } from 'ngx-cookie-service';
     AppComponent,
     HomeComponent,
     EnergetikaiComponent,
-    HutestechnikaComponent,
+    ErrorComponent,
     KapcsolatComponent,
     KlimatechnikaComponent,
     NavbarComponent,
