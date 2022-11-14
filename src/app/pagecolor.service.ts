@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
+import {BehaviorSubject } from "rxjs";
 
 const colors:string[] = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','twentyone','twentytwo','twentythree'];
 
@@ -9,17 +10,23 @@ const colors:string[] = ['zero','one','two','three','four','five','six','seven',
 
 
 export class PagecolorService {
+  private messageSource = new BehaviorSubject(1);
+  currentMessage = this.messageSource.asObservable();
 
   constructor(private cookieService: CookieService) { }
-  colorValue:number = 19;
+  colorValue:number = 23;
 
   start(){
     if (this.cookieService.check('color')){
       this.colorValue=Number(this.cookieService.get('color'));
     }
+    this.changeMessage(this.colorValue)
+  }
+  getSlider(){
+    return this.colorValue;
   }
   getColor(light?:boolean) {
-    if (light==true){
+    if (light){
       if (this.colorValue>25)return 'hot'
       else if (this.colorValue>20) return 'mild'
       else return 'cold'
@@ -29,8 +36,12 @@ export class PagecolorService {
   }
 
   setColor(color:number) {
+    this.changeMessage(color)
+
     this.cookieService.set('color',color+'');
     this.colorValue = color;
-
+  }
+  changeMessage(message: number) {
+    this.messageSource.next(message)
   }
 }

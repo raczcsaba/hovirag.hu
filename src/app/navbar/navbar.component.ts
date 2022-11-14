@@ -13,20 +13,21 @@ interface navbar {
 })
 
 
-
 export class NavbarComponent implements OnInit {
 
   LINKS: navbar[] = [
-    { url: '/energetikai', title: 'Energetikai Tanusítás' },
-    { url: '/klimatechnika', title: 'Klímatechnika' },
-    { url: '/hutestechnika', title: 'Hűtéstechnika' },
-    { url: '/kapcsolat', title: 'Kapcsolat' },
+    {url: '/energetikai', title: 'Energetikai Tanusítás'},
+    {url: '/hutestechnika', title: 'Hűtéstechnika'},
+    {url: '/klimatechnika', title: 'Klímatechnika'},
+    {url: '/kapcsolat', title: 'Kapcsolat'},
   ]
-  colors:string[] = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','twentyone','twentytwo','twentythree'];
+  colors: string[] = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree'];
 
 
-  constructor(public colorService:PagecolorService) { }
-  @ViewChild('matslider')slider:any;
+  constructor(public colorService: PagecolorService) {
+  }
+
+  @ViewChild('matslider') slider: any;
 
   ngOnInit(): void {
     this.colorService.start();
@@ -85,4 +86,21 @@ export class NavbarComponent implements OnInit {
     }
     return "url('../../assets/img/bgcold.png')"
   }
+
+  getOppacity(value: number,i:number) {
+    if (i==2){
+      return value>33 ? 99 : value <= 17 ? 0 : (value - 11) * 4;
+    }
+    else if (i==1){
+      return value<13 ? 99 : value > 29 ? 0 : (35 - value) * 4;
+
+    }else {
+      return 0;
+    }
+  }
+
+  getColor(i: number) {
+    return i==2?'rgba(255, 69, 0,0.':i==1?'rgb(95, 158, 160,0.':'rgba(0,0,0,0.';
+  }
+
 }
