@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GetDataService } from  '../get-data.service'
 import {data, kep} from '../datainterface'
 import { PagecolorService } from  '../pagecolor.service'
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -20,14 +19,11 @@ export class KlimatechnikaComponent implements OnInit {
   filtered: data[] = [];
   type:string = " "
   nodata:boolean = false;
-  constructor(public dataservice:GetDataService, public colorservice:PagecolorService,private activatedroute:ActivatedRoute) { }
+  constructor(public dataservice:GetDataService, public colorservice:PagecolorService) { }
   ngOnInit(): void {
-    this.activatedroute.data.subscribe(data => {
-      this.type= data['page'];
-    })
-    this.dataservice.getData().then((dat) => {
+    this.dataservice.getData('/api/munkaks?populate=*').then((dat) => {
       if(dat.status == 200) {
-        this.mydata = this.dataservice.sortData(dat)
+        this.mydata = this.dataservice.sortMunka(dat)
         if (this.dataservice.rickroll){
           window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
         }
@@ -39,15 +35,11 @@ export class KlimatechnikaComponent implements OnInit {
             this.hutes.push(value);
           }
         })
-        //console.log(this.hutes);
-
-
-
-
-
+        this.filterItem(this.colorservice.colorValue);
       }else{ this.nodata = true}
 
     })
+
     //ez itt nagyon fájt
     this.colorservice.currentMessage.subscribe(message =>{
       if (!this.nodata){
@@ -78,36 +70,34 @@ export class KlimatechnikaComponent implements OnInit {
   filterItem(r:number){
     r-=12;
     this.filtered = [];
-    console.log(this.filtered.length)
-
+    this.indexk = 0;
+    this.indexh = 0;
     if (r==11){
-      console.log("huugeci")
       this.mydata.forEach(val => {
         this.filtered.push(val)
       });
     }
     else if (r<11){
-      console.log("au " + this.hutes.length)
-      this.hutes.forEach(val => {
-        this.filtered.push(val)
-      });
       let h = this.klima.length >= r ? r : this.klima.length;
-      //console.log(h+" sdfg")
-      for (let i = 0;i<h;i++){
-        this.filtered.push(this.klima[i]);
-        //console.log("hossz " + this.filtered.length)
-      }
-    } else{
-      console.log("au " + this.hutes.length)
-      this.klima.forEach(val => {
-        this.filtered.push(val)
+      this.mydata.forEach(val => {
+        if (val.category=="hutestechnika"){
+          this.filtered.push(val)
+        }else if (this.indexk<h){
+          this.filtered.push(val)
+          this.indexk++;
+        }
       });
+
+    } else{
       let h = this.hutes.length >= 22-r ? 22-r : this.hutes.length;
-      //console.log(h+" sdfg")
-      for (let i = 0;i<h;i++){
-        this.filtered.push(this.hutes[i]);
-        //console.log("hossz " + this.filtered.length)
-      }
+      this.mydata.forEach(val => {
+        if (val.category=="klimatechnika"){
+          this.filtered.push(val)
+        }else if (this.indexh<h){
+          this.filtered.push(val)
+          this.indexh++;
+        }
+      });
     }
 
   }

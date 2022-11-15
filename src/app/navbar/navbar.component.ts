@@ -17,8 +17,8 @@ export class NavbarComponent implements OnInit {
 
   LINKS: navbar[] = [
     {url: '/energetikai', title: 'Energetikai Tanusítás'},
-    {url: '/hutestechnika', title: 'Hűtéstechnika'},
-    {url: '/klimatechnika', title: 'Klímatechnika'},
+    {url: '/munkak', title: 'Hűtéstechnika'},
+    {url: '/munkak', title: 'Klímatechnika'},
     {url: '/kapcsolat', title: 'Kapcsolat'},
   ]
   colors: string[] = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree'];
@@ -103,4 +103,15 @@ export class NavbarComponent implements OnInit {
     return i==2?'rgba(255, 69, 0,0.':i==1?'rgb(95, 158, 160,0.':'rgba(0,0,0,0.';
   }
 
+  setSlider(i: number) {
+    if (this.slider.value>12&&i==1){
+      this.slider.value = 12
+      this.klima = true
+      this.colorService.setColor(12);
+    }else if (this.slider.value<34&&i==2){
+      this.slider.value = 34
+      this.klima = true
+      this.colorService.setColor(34);
+    }
+  }
 }

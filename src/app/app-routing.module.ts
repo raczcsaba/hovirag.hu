@@ -9,8 +9,7 @@ import {EnergetikaiComponent} from "./energetikai/energetikai.component";
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'energetikai', component: EnergetikaiComponent },
-  { path: 'klimatechnika', component: KlimatechnikaComponent, data :{ page:"klimatechnika"} },
-  { path: 'hutestechnika', component: KlimatechnikaComponent, data :{ page:"hutestechnika"} },
+  { path: 'munkak', component: KlimatechnikaComponent },
   { path: 'kapcsolat', component: KapcsolatComponent },
 ];
 

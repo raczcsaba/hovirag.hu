@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import { GetDataService } from  '../get-data.service'
+import { fooldal } from '../datainterface'
 import { PagecolorService } from  '../pagecolor.service'
 
 @Component({
@@ -8,9 +10,17 @@ import { PagecolorService } from  '../pagecolor.service'
 })
 export class HomeComponent implements OnInit {
   colors:string[] = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','twentyone','twentytwo','twentythree'];
+  mydata:fooldal = {cim:" ",leiras:" ", alcim:" ",altartalom:" ", kep:" ", alt:" ", motto:" "}
+  constructor(public colorService:PagecolorService, public dataservice: GetDataService) { }
 
-  constructor(public colorService:PagecolorService) { }
+  ngOnInit(): void {
+    this.dataservice.getData('/api/fooldals/1?populate=*').then((dat) => {
+      if(dat.status == 200) {
+        this.mydata = this.dataservice.sortMain(dat)
 
-  ngOnInit(): void {}
+      }
+
+    })
+  }
 
 }

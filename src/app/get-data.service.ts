@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosResponse} from 'axios';
-import {data, kep} from './datainterface'
-const url = "http://localhost:1337";
+import {data, fooldal, kep, energetikai, marka} from './datainterface'
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +10,11 @@ export class GetDataService {
 
   constructor() { }
   mydata:data[] = [];
+  url:string = "http://localhost:1337";
   rickroll:boolean = false
-  getData():Promise<AxiosResponse>{
+  getData(api:string):Promise<AxiosResponse>{
 
-    return axios.get('http://localhost:1337/api/munkaks?populate=*', {
+    return axios.get(this.url+api, {
       validateStatus: function (status) {
         return status < 500; // Resolve only if the status code is less than 500
       }
@@ -22,15 +22,16 @@ export class GetDataService {
 
   }
 
-  sortData(value:AxiosResponse){
+
+  sortMunka(value:AxiosResponse){
     this.mydata = [];
     value.data.data.forEach((value: any) => {
       let kepek:kep[] = [];
       try {
         value.attributes.kepek.data.forEach((k:any)=>{
           let kepem:kep = {
-            normal:url + k.attributes.formats.medium.url + "",
-            high:url + k.attributes.formats.large.url + ""
+            normal:this.url + k.attributes.formats.medium.url + "",
+            high:this.url + k.attributes.formats.large.url + ""
           }
           kepek.push(kepem);
         })
@@ -59,5 +60,39 @@ export class GetDataService {
     return this.mydata;
   }
 
+  sortMain(value:AxiosResponse){
 
+      let main: fooldal = {
+        cim:value.data.data.attributes.cim,
+        leiras:value.data.data.attributes.leiras,
+        alcim:value.data.data.attributes.alcim,
+        altartalom:value.data.data.attributes.altartalom,
+        kep:value.data.data.attributes.kep.data.attributes.url,
+        alt:value.data.data.attributes.kep.data.attributes.alternativeText,
+        motto:value.data.data.attributes.motto
+
+      };
+      return main
+  }
+
+  sortEnergia(value:AxiosResponse){
+    let energ: energetikai = {
+      cim:value.data.data.attributes.cim,
+      leiras:value.data.data.attributes.leiras,
+      kep:value.data.data.attributes.kep.data.attributes.url,
+      alt:value.data.data.attributes.kep.data.attributes.alternativeText,
+    };
+    return energ
+
+  }
+  sortMarka(value:AxiosResponse){
+    let mark: energetikai = {
+      cim:value.data.data.attributes.cim,
+      leiras:value.data.data.attributes.leiras,
+      kep:value.data.data.attributes.kep.data.attributes.url,
+      alt:value.data.data.attributes.kep.data.attributes.alternativeText,
+    };
+    return mark
+
+  }
 }

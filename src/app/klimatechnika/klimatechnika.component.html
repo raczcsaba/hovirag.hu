@@ -1,6 +1,6 @@
 <div *ngIf="!nodata" class="cont">
   <div *ngFor="let data of filtered; index as i" class="item">
-    <mat-card class="mycard" [ngClass]="colorservice.getColor(true)">
+    <mat-card class="mycard" [ngClass]="colorservice.getColor(1)">
       <mat-card-content class="cardcont">
         <mat-card-title>{{data.title}}</mat-card-title>
 

@@ -25,13 +25,16 @@ export class PagecolorService {
   getSlider(){
     return this.colorValue;
   }
-  getColor(light?:boolean) {
-    if (light){
-      if (this.colorValue>25)return 'hot'
-      else if (this.colorValue>20) return 'mild'
-      else return 'cold'
-    }else {
-      return colors[this.colorValue - 12];
+  getColor(param?:number) {
+    switch (param) {
+      case 1:
+        if (this.colorValue>25)return 'hot';
+        else if (this.colorValue>20) return 'mild';
+        else return 'cold';
+      case 2:
+        return colors[22-(this.colorValue - 12)];
+      default:
+        return colors[this.colorValue - 12];
     }
   }
 
