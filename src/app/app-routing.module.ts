@@ -1,4 +1,4 @@
-import {Input, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {KlimatechnikaComponent} from "./klimatechnika/klimatechnika.component";
@@ -9,7 +9,7 @@ import {EnergetikaiComponent} from "./energetikai/energetikai.component";
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'energetikai', component: EnergetikaiComponent },
-  { path: 'munkak', component: KlimatechnikaComponent },
+  { path: 'munkak', component: KlimatechnikaComponent, data:{ info : "munkak" } },
   { path: 'kapcsolat', component: KapcsolatComponent },
 ];
 

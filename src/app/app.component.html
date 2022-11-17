@@ -1,1 +1,11 @@
-<app-navbar></app-navbar>
+<div style="height: 100%" [ngClass]="colorservice.getColor()" (click)="clickEvent()">
+  <app-navbar [data]="click"></app-navbar>
+
+  <div class="main" [ngClass]="colorservice.getColor()" [ngStyle]="{'background-image':pic}">
+
+    <router-outlet></router-outlet>
+
+  </div>
+  <app-footer style="height: 100px"></app-footer>
+
+</div>

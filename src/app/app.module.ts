@@ -17,6 +17,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 
 import { CookieService } from 'ngx-cookie-service';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CookieService } from 'ngx-cookie-service';
     KapcsolatComponent,
     KlimatechnikaComponent,
     NavbarComponent,
+    FooterComponent,
 
   ],
   imports: [

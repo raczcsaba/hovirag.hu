@@ -1,1 +1,29 @@
-<p>energetikai works!</p>
+<div class="body">
+  <h1 class="h1">{{mydata.cim}}</h1>
+  <div class="cont">
+    <div class="item">
+      <div class="myborder" [ngClass]="colorService.getColor()">
+        <img class="kep" [src]="dataservice.url + mydata.kep" [alt]="mydata.alt">
+
+      </div>
+    </div>
+    <div class="item">
+      <span [innerText]="mydata.leiras"></span>
+      <h3 class="h3" [innerText]="mydata.motto"></h3>
+      <div class="nagy">
+        <h2 class="h2">
+          {{mydata.alcim}}
+        </h2>
+        <p class="p" [innerText]="mydata.altartalom">
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="kicsi">
+    <h2 class="h2">
+      {{mydata.alcim}}
+    </h2>
+    <p class="p" [innerText]="mydata.altartalom">
+    </p>
+  </div>
+</div>

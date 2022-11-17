@@ -1,11 +1,11 @@
-<div [ngClass]="colorService.getColor()">
+<div>
   <div class="imgpic">
-    <img [src]="matslider.value>20 ? '../../assets/img/tophot.jpg' : '../../assets/img/topcold.jpg'" (click)="alttogle()" #toppic id="top" style="width: 100%">
+    <img [src]="matslider.value>20 ? '../../assets/img/tophot.jpg' : '../../assets/img/topcold.jpg'" #toppic id="top" style="width: 100%">
     <div class="navibar" (scroll)="onscroll()" [ngClass]="navbarfixed?['fixed',colorService.getColor()]:['nofixed',colorService.getColor()]">
       <button class="navitoggler" (click)="toggleNavbar()" type="button">
         <img src="../../assets/img/logofel.png" height="87px">
       </button>
-      <img src="../../assets/img/logofel.png" class="navibaritem" height="87px" style="padding: 0!important;" routerLink="">
+      <img [ngStyle]="{'background-color': getColor(4)+getOppacity(matslider.value,4)+')'}" src="../../assets/img/logofel.png" class="navibaritem" height="87px" style="padding: 0!important;" routerLink="">
       <div class="navibaritem" (click)="setSlider(i)" routerLink="{{nav.url}}" *ngFor="let nav of LINKS, index as i">
         <div [ngStyle]="{'background-color': getColor(i)+getOppacity(matslider.value,i)+')'}" class="focus">{{nav.title}}</div>
       </div>
@@ -15,11 +15,9 @@
       </div>
       <img  (click)="clima()" src="../../assets/img/klima.png" height="87px" style="padding: 0!important; margin-left: auto;">
       <p (click)="clima()" class="homero">{{matslider.value}}</p>
-      <mat-slider [ngClass]="klima?'showac':'hideac'" #matslider (input)="setColor(matslider.value)" min="12" max="34" step="1" value="23"></mat-slider>
+      <mat-slider (click)="clima()" [ngClass]="klima?'showac':'hideac'" #matslider (input)="setColor(matslider.value)" min="12" max="34" step="1" value="23"></mat-slider>
     </div>
   </div>
 
-  <div class="main" (click)="alttogle()" [ngStyle]="{'background-image':getbg(matslider.value)}">
-    <router-outlet></router-outlet>
-  </div>
+
 </div>

@@ -19,20 +19,23 @@ export class KlimatechnikaComponent implements OnInit {
   filtered: data[] = [];
   type:string = " "
   nodata:boolean = false;
+
   constructor(public dataservice:GetDataService, public colorservice:PagecolorService) { }
+
   ngOnInit(): void {
     this.dataservice.getData('/api/munkaks?populate=*').then((dat) => {
       if(dat.status == 200) {
         this.mydata = this.dataservice.sortMunka(dat)
         if (this.dataservice.rickroll){
+          console.log("hmm")
           window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
         }
         this.mydata.forEach(value => {
-          if (value.category=="klimatechnika"){
-            this.klima.push(value)
+          if (value.category=="hutestechnika"){
+            this.hutes.push(value)
           }
           else{
-            this.hutes.push(value);
+            this.klima.push(value);
           }
         })
         this.filterItem(this.colorservice.colorValue);
@@ -43,9 +46,7 @@ export class KlimatechnikaComponent implements OnInit {
     //ez itt nagyon fájt
     this.colorservice.currentMessage.subscribe(message =>{
       if (!this.nodata){
-
         this.filterItem(message)
-
       }
     })
   };
@@ -53,11 +54,11 @@ export class KlimatechnikaComponent implements OnInit {
   //mycaraousel
   getpic(pic:kep[] | undefined) {
     if (typeof pic != 'undefined'){
-      if (pic[0].normal=="istenfaszaverjebele"){
+      if (pic[0].high=="istenfaszaverjebele"){
         return "../../assets/img/sad.png";
       }
       else {
-        return pic[0].normal;
+        return pic[0].high;
       }
     }
     return "../../assets/img/sad.png";
@@ -91,7 +92,7 @@ export class KlimatechnikaComponent implements OnInit {
     } else{
       let h = this.hutes.length >= 22-r ? 22-r : this.hutes.length;
       this.mydata.forEach(val => {
-        if (val.category=="klimatechnika"){
+        if (val.category=="klimatechnika"||val.category=="reklam"){
           this.filtered.push(val)
         }else if (this.indexh<h){
           this.filtered.push(val)

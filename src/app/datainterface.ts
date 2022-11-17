@@ -1,27 +1,16 @@
 export interface data {
+  id:number;
   title: string;
   description: string;
   category: string,
   pictures: kep[] | undefined
 }
 export interface kep {
-  normal?:string,
+  alt?:string,
   high:string
+}
 
-}
-export interface energetikai {
-  cim:string,
-  leiras:string,
-  kep:string,
-  alt:string,
-}
-export interface marka {
-  cim:string,
-  leiras:string,
-  kep:string,
-  alt:string
-}
-export interface fooldal {
+export interface main {
   cim:string,
   leiras:string,
   alcim:string,
