@@ -20,6 +20,7 @@ export class KlimatechnikaComponent implements OnInit {
   type:string = " "
   nodata:boolean = false;
   selected?: data;
+  sIndex = 0;
 
   constructor(public dataservice:GetDataService, public colorservice:PagecolorService) { }
 
@@ -102,13 +103,24 @@ export class KlimatechnikaComponent implements OnInit {
   displayStyle = "none";
 
   openPopup() {
-    this.displayStyle = "block";
+    this.displayStyle = "flex";
   }
   closePopup() {
     this.displayStyle = "none";
   }
   select(dat:data) {
     this.selected = dat;
+    this.sIndex = 0;
     this.openPopup()
+  }
+
+  nextPic() {
+    let l = this.selected?this.selected.pictures?this.selected.pictures.length:0:0
+    this.sIndex = this.sIndex < l - 1 ? this.sIndex + 1 : 0;
+  }
+
+  prevPic() {
+    let l = this.selected?this.selected.pictures?this.selected.pictures.length:0:0
+    this.sIndex -= this.sIndex > 0 ? 1 : -l + 1
   }
 }

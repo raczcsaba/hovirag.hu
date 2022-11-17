@@ -18,6 +18,7 @@ import {MatChipsModule} from '@angular/material/chips';
 
 import { CookieService } from 'ngx-cookie-service';
 import { FooterComponent } from './footer/footer.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FooterComponent } from './footer/footer.component';
     BrowserAnimationsModule,
     MatSliderModule,
     MatCardModule,
-    MatChipsModule
+    MatChipsModule,
+    MatIconModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

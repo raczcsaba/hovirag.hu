@@ -7,7 +7,7 @@
           <p class="carddescrip">
             {{data.description}}
           </p>
-          <div class="bord">
+          <div>
             <img (click)="select(data)" class="img" [src]="getpic(data.pictures)">
           </div>
         </mat-card-content>
@@ -27,7 +27,7 @@
           <p class="carddescrip">
             {{data.description}}
           </p>
-          <div class="bord">
+          <div>
             <img (click)="select(data)" class="img" [src]="getpic(data.pictures)">
           </div>
         </mat-card-content>
@@ -46,23 +46,21 @@
   class="modal"
   tabindex="-1"
   role="dialog"
-  (click)="closePopup()"
   [ngStyle]="{'display':displayStyle}">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog bord" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">{{selected.title}}</h4>
+        <button type="button" class="btn btn-danger" (click)="closePopup()"><mat-icon>close</mat-icon></button>
       </div>
       <div class="modal-body">
-        <p>One Stop Solution for all CS problems</p>
+        <div class="bord">
+          <button type="button" class="btn" (click)="prevPic()"><mat-icon>navigate_before</mat-icon></button>
+          <img class="modalimg" *ngFor="let pic of selected.pictures; index as i" [ngClass]="sIndex==i?'':'hidePic'" [src]="pic.high" [alt]="pic.alt">
+          <button type="button" class="btn" (click)="nextPic()"><mat-icon>navigate_next</mat-icon></button>
+        </div>
+      </div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger"
-                (click)="closePopup()">
-          Close
-        </button>
-      </div>
     </div>
   </div>
 </div>
