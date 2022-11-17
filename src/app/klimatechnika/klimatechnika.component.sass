@@ -1,36 +1,33 @@
+.body
+  display: flex
+  flex-wrap: nowrap
+  align-items: stretch
+  align-content: flex-start
+  justify-content: space-evenly
+  padding: 0 30px
 .mycard
   z-index: 0
   height: 100%
   width: 100%
-  background-color: rgba(0, 0, 0, 0.7)
+  background-color: rgba(0, 0, 0, 0.5)
   color: bisque
   border-radius: 15px
 
 
 .cont
-  padding-top: 30px
-  width: 80%
+  width: 50%
   margin: auto
   display: flex
   flex-wrap: wrap
+  flex-direction: column
   align-items: stretch
   align-content: flex-start
   justify-content: space-evenly
-  gap: 20px 20px
-
-.item
-  flex: 3
-  max-width: 400px
-
+  margin-top: 0
+  padding: 30px 10px
 .carddescrip
   margin: 10px 0px
 
-img
-  max-width: 300px
-  width: auto
-  border: 0
-  margin: auto
-  background-image: url("http://localhost:1337/uploads/medium_tapai3_35a176febf.jpg")
 .chip
   display: inline-block
   padding: 0 25px
@@ -45,8 +42,23 @@ img
   padding: 20px 0
 .cardcont
   height: 85%
+
 .hide
   display: none
 
-
+.img
+  max-width: 100%
+  height: auto
+  border-radius: 15px
+  margin: 20px 0
+.item
+  flex: 0 0 100%
+  margin: 20px 0
+@media only screen and (max-width: 1200px)
+  .bigview
+    display: none
+  .hide
+    display: block
+  .smallview
+    width: 100%
 

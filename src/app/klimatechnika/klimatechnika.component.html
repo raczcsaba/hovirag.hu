@@ -1,23 +1,69 @@
-<div *ngIf="!nodata" class="cont">
-  <div *ngFor="let data of filtered; index as i" class="item">
-    <mat-card class="mycard" [ngClass]="colorservice.getColor(1)">
-      <mat-card-content class="cardcont">
-        <mat-card-title>{{data.title}}</mat-card-title>
-
-        <div class="bord">
-            <img class="img" [src]="getpic(data.pictures)">
+<div *ngIf="!nodata" class="body">
+  <div class="cont smallview">
+    <div *ngFor="let data of filtered; let even=even" class="item" [ngClass]="even==true?'':'hide'">
+      <mat-card class="mycard" [ngClass]="colorservice.getColor(1)">
+        <mat-card-content class="cardcont">
+          <mat-card-title>{{data.title}}</mat-card-title>
+          <p class="carddescrip">
+            {{data.description}}
+          </p>
+          <div class="bord">
+            <img (click)="select(data)" class="img" [src]="getpic(data.pictures)">
           </div>
-        <p class="carddescrip">
-          {{data.description}}
-        </p>
-
-      </mat-card-content>
-      <div class="chipcont">
-        <div class="chip" [ngClass]="colorservice.getColor()">
-          {{data.category}}
+        </mat-card-content>
+        <div class="chipcont">
+          <div class="chip" [ngClass]="colorservice.getColor()">
+            {{data.category}}
+          </div>
         </div>
+      </mat-card>
+    </div>
+  </div>
+  <div class="cont bigview">
+    <div *ngFor="let data of filtered; let odd=odd" class="item" [ngClass]="odd?'':'hide'" >
+      <mat-card class="mycard" [ngClass]="colorservice.getColor(1)">
+        <mat-card-content class="cardcont">
+          <mat-card-title>{{data.title}}</mat-card-title>
+          <p class="carddescrip">
+            {{data.description}}
+          </p>
+          <div class="bord">
+            <img (click)="select(data)" class="img" [src]="getpic(data.pictures)">
+          </div>
+        </mat-card-content>
+        <div class="chipcont">
+          <div class="chip" [ngClass]="colorservice.getColor()">
+            {{data.category}}
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="selected"
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  (click)="closePopup()"
+  [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{selected.title}}</h4>
       </div>
-    </mat-card>
+      <div class="modal-body">
+        <p>One Stop Solution for all CS problems</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"
+                (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 <app-error *ngIf="nodata"></app-error>

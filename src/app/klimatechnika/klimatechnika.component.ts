@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { GetDataService } from  '../get-data.service'
 import {data, kep} from '../datainterface'
 import { PagecolorService } from  '../pagecolor.service'
@@ -19,6 +19,7 @@ export class KlimatechnikaComponent implements OnInit {
   filtered: data[] = [];
   type:string = " "
   nodata:boolean = false;
+  selected?: data;
 
   constructor(public dataservice:GetDataService, public colorservice:PagecolorService) { }
 
@@ -40,9 +41,7 @@ export class KlimatechnikaComponent implements OnInit {
         })
         this.filterItem(this.colorservice.colorValue);
       }else{ this.nodata = true}
-
     })
-
     //ez itt nagyon fájt
     this.colorservice.currentMessage.subscribe(message =>{
       if (!this.nodata){
@@ -65,14 +64,11 @@ export class KlimatechnikaComponent implements OnInit {
   }
 
   //filter items
-  indexk = 0;
-  indexh = 0;
-
   filterItem(r:number){
     r-=12;
     this.filtered = [];
-    this.indexk = 0;
-    this.indexh = 0;
+    let indexk = 0;
+    let indexh = 0;
     if (r==11){
       this.mydata.forEach(val => {
         this.filtered.push(val)
@@ -83,86 +79,36 @@ export class KlimatechnikaComponent implements OnInit {
       this.mydata.forEach(val => {
         if (val.category=="hutestechnika"){
           this.filtered.push(val)
-        }else if (this.indexk<h){
+        }else if (indexk<h){
           this.filtered.push(val)
-          this.indexk++;
+          indexk++;
         }
       });
-
     } else{
       let h = this.hutes.length >= 22-r ? 22-r : this.hutes.length;
       this.mydata.forEach(val => {
         if (val.category=="klimatechnika"||val.category=="reklam"){
           this.filtered.push(val)
-        }else if (this.indexh<h){
+        }else if (indexh<h){
           this.filtered.push(val)
-          this.indexh++;
+          indexh++;
         }
       });
     }
 
   }
 
+  //modal
+  displayStyle = "none";
 
-  /*filterItem(dat:data[]){
-    let r = this.colorservice.getSlider()-12
-    this.filtered = [];
-    this.indexk = 0
-    this.indexh = 0
-    dat.forEach(d => {
-      if (d.category == "klimatechnika"){
-        if (r>=11){ this.filtered.push(d) }
-        else if (this.indexk > 11-r) {  }
-        else { this.indexk++; this.filtered.push(d); }
-
-      }else if (d.category == "hutestechnika"){
-        if (r<=11){ this.filtered.push(d) }
-        else if (this.indexh > 11 - (r - 11)) {  }
-        else { this.indexh++; this.filtered.push(d); }
-      }
-    })
+  openPopup() {
+    this.displayStyle = "block";
   }
-
-
-  filterItem(category: string) {
-    let r = this.colorservice.getSlider()-12
-    if (category == "klimatechnika"){
-      if (r>11){
-        return true;
-      }
-      else if (r==0){
-        return false
-      }else if((22-r)/2>this.indexk){
-        //console.log(r+" index: " + this.indexk)
-        this.indexk = 0;
-        return true
-      }else {
-        console.log(r+" index: " + this.indexk)
-
-        this.indexk++;
-        return false
-      }
-
-    }
-    else if (category == "hutestechnika"){
-      if (r<=11){
-        return true;
-      }
-      else if (r==22){
-        return false
-      }else if(r/2<=this.indexh){
-        this.indexh = 0;
-        return true
-      }else {
-        console.log(r+" index: " + this.indexh)
-
-        this.indexh++;
-        return false
-      }
-    }
-    else {
-      return false
-    }
-
-  }*/
+  closePopup() {
+    this.displayStyle = "none";
+  }
+  select(dat:data) {
+    this.selected = dat;
+    this.openPopup()
+  }
 }
