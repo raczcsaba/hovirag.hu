@@ -90,6 +90,7 @@ export class NavbarComponent implements OnInit {
 
   setSlider(i: number) {
     this.toggletime = true;
+    this.navbarOpen = false
     setTimeout(() => {
       if (this.slider.value>12&&i==1){
         this.klima = true

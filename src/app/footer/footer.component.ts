@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PagecolorService } from  '../pagecolor.service'
+import {GetDataService} from "../get-data.service";
+import {contact} from "../datainterface";
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public colorService:PagecolorService, public dataservice: GetDataService) { }
+
+  mydata:contact = {nev:" ", kep:" ", cegadat:" ", alt :" ", licencek:" ", cegnev:" ", tel:" ", email: " "}
 
   ngOnInit(): void {
+    this.dataservice.getData('/api/elerhetosegs/1?populate=*').then((dat) => {
+      if(dat.status == 200) {
+        this.mydata = this.dataservice.sortContact(dat)
+
+      }
+    })
   }
 
 }

@@ -1,1 +1,7 @@
-<p>footer works!</p>
+<div [ngClass]="colorService.getColor(1)" class="footer">
+  <img src="../../assets/img/logo_vonalas.png">
+  <div>
+    <h3>{{mydata.cegnev}}</h3>
+    <p [innerText]="mydata.cegadat"></p>
+  </div>
+</div>

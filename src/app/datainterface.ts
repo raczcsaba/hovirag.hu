@@ -21,3 +21,14 @@ export interface main {
 
 }
 
+export interface contact {
+  nev:string,
+  email:string,
+  tel:string,
+  cegnev:string,
+  cegadat:string,
+  alt:string,
+  kep:string,
+  licencek:string
+
+}

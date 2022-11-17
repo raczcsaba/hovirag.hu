@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosResponse} from 'axios';
-import {data, main, kep, } from './datainterface'
+import {data, main, kep, contact} from './datainterface'
 
 @Injectable({
   providedIn: 'root'
@@ -75,5 +75,17 @@ export class GetDataService {
       return main
   }
 
-
+  sortContact(value:AxiosResponse){
+    let cont: contact = {
+      nev:value.data.data.attributes.nev  ?? " ",
+      email:value.data.data.attributes.email  ?? " ",
+      tel:value.data.data.attributes.telefon  ?? " ",
+      cegnev:value.data.data.attributes.cegnev  ?? " ",
+      kep:value.data.data.attributes.profilkep.data.attributes.url ?? "../../assets/img/sad.png",
+      alt:value.data.data.attributes.profilkep.data.attributes.alternativeText ?? " ",
+      cegadat:value.data.data.attributes.cegadatok ?? " ",
+      licencek:value.data.data.attributes.keplicencek ?? " "
+    };
+    return cont
+  }
 }

@@ -28,7 +28,7 @@ export class PagecolorService {
   getColor(param?:number) {
     switch (param) {
       case 1:
-        if (this.colorValue>25)return 'hot';
+        if (this.colorValue>30)return 'hot';
         else if (this.colorValue>20) return 'mild';
         else return 'cold';
       case 2:
