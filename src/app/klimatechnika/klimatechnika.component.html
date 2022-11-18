@@ -1,4 +1,4 @@
-<div *ngIf="!nodata" class="body">
+<div class="body">
   <div class="cont smallview">
     <div *ngFor="let data of filtered; let even=even" class="item" [ngClass]="even==true?'':'hide'">
       <mat-card class="mycard" [ngClass]="colorservice.getColor(1)">
@@ -64,4 +64,3 @@
     </div>
   </div>
 </div>
-<app-error *ngIf="nodata"></app-error>

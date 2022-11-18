@@ -11,6 +11,8 @@ const routes: Routes = [
   { path: 'energetikai', component: EnergetikaiComponent },
   { path: 'munkak', component: KlimatechnikaComponent, data:{ info : "munkak" } },
   { path: 'kapcsolat', component: KapcsolatComponent },
+  { path: 'error', component: ErrorComponent },
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({

@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { GetDataService } from  '../get-data.service'
 import {data, kep} from '../datainterface'
 import { PagecolorService } from  '../pagecolor.service'
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -18,36 +19,33 @@ export class KlimatechnikaComponent implements OnInit {
   hutes: data[] = [];
   filtered: data[] = [];
   type:string = " "
-  nodata:boolean = false;
   selected?: data;
   sIndex = 0;
+  displayStyle = "none";
 
-  constructor(public dataservice:GetDataService, public colorservice:PagecolorService) { }
+  constructor(public dataservice:GetDataService, public colorservice:PagecolorService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataservice.getData('/api/munkaks?populate=*').then((dat) => {
-      if(dat.status == 200) {
-        this.mydata = this.dataservice.sortMunka(dat)
-        if (this.dataservice.rickroll){
-          console.log("hmm")
-          window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
-        }
-        this.mydata.forEach(value => {
-          if (value.category=="hutestechnika"){
-            this.hutes.push(value)
-          }
-          else{
-            this.klima.push(value);
-          }
-        })
-        this.filterItem(this.colorservice.colorValue);
-      }else{ this.nodata = true}
-    })
-    //ez itt nagyon fájt
-    this.colorservice.currentMessage.subscribe(message =>{
-      if (!this.nodata){
-        this.filterItem(message)
+      this.mydata = this.dataservice.sortMunka(dat)
+      if (this.dataservice.rickroll){
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
       }
+      this.mydata.forEach(value => {
+        if (value.category=="hutestechnika"){
+          this.hutes.push(value)
+        }
+        else{
+          this.klima.push(value);
+        }
+      })
+      this.filterItem(this.colorservice.colorValue);
+    })
+    .catch(error => {
+      this.router.navigate(['/', 'error']);
+    })
+    this.colorservice.currentMessage.subscribe(message =>{
+      this.filterItem(message)
     })
   };
 
@@ -100,14 +98,15 @@ export class KlimatechnikaComponent implements OnInit {
   }
 
   //modal
-  displayStyle = "none";
 
   openPopup() {
     this.displayStyle = "flex";
   }
+
   closePopup() {
     this.displayStyle = "none";
   }
+
   select(dat:data) {
     this.selected = dat;
     this.sIndex = 0;

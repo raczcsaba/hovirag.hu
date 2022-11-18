@@ -1,1 +1,27 @@
-<p>kapcsolat works!</p>
+<div class="body">
+  <div class="cont">
+    <div class="item">
+      <div class="myborder" [ngClass]="colorService.getColor()">
+        <img class="kep" [src]="dataservice.url + mydata.kep" [alt]="mydata.alt">
+      </div>
+    </div>
+    <div class="item">
+      <h1 class="h1">{{mydata.nev}}</h1>
+      <h2 class="h1">{{mydata.tel}}</h2>
+      <p class="p" [innerText]="mydata.email"></p>
+    </div>
+  </div>
+  <div class="cont" style="flex-direction: row-reverse">
+    <div class="item">
+      <div class="myborder" [ngClass]="colorService.getColor()">
+        <img class="kep" [src]="colorService.colorValue>20 ? '../../assets/img/abouthot.jpg' : '../../assets/img/aboutcold.jpg'">
+      </div>
+    </div>
+    <div class="item">
+      <h1 class="h1">{{mydata.cegnev}}</h1>
+      <p class="p" [innerText]="mydata.cegadat"></p>
+      <p class="p">Oldalunkon található képek:</p>
+      <p class="p" [innerText]="mydata.licencek"></p>
+    </div>
+  </div>
+</div>
