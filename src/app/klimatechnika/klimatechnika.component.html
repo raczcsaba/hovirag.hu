@@ -7,8 +7,9 @@
           <p class="carddescrip">
             {{data.description}}
           </p>
-          <div>
-            <img (click)="select(data)" class="img" [src]="getpic(data.pictures)">
+          <div (click)="select(data)">
+            <img *ngFor="let pic of data.pictures" class="img" [src]="getpic(pic)">
+            <button class="more"><mat-icon>fullscreen</mat-icon></button>
           </div>
         </mat-card-content>
         <div class="chipcont">
@@ -27,8 +28,9 @@
           <p class="carddescrip">
             {{data.description}}
           </p>
-          <div>
-            <img (click)="select(data)" class="img" [src]="getpic(data.pictures)">
+          <div (click)="select(data)">
+            <img *ngFor="let pic of data.pictures" class="img" [src]="getpic(pic)">
+            <button class="more"><mat-icon>fullscreen</mat-icon></button>
           </div>
         </mat-card-content>
         <div class="chipcont">
