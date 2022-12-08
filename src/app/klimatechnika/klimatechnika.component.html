@@ -8,7 +8,7 @@
             {{data.description}}
           </p>
           <div (click)="select(data)">
-            <img *ngFor="let pic of data.pictures" class="img" [src]="getpic(pic)">
+            <img *ngFor="let pic of data.pictures" class="img" [src]="pic.high" [alt]="pic.alt">
             <button class="more"><mat-icon>fullscreen</mat-icon></button>
           </div>
         </mat-card-content>
@@ -29,7 +29,7 @@
             {{data.description}}
           </p>
           <div (click)="select(data)">
-            <img *ngFor="let pic of data.pictures" class="img" [src]="getpic(pic)">
+            <img *ngFor="let pic of data.pictures" class="img" [src]="pic.high" [alt]="pic.alt">
             <button class="more"><mat-icon>fullscreen</mat-icon></button>
           </div>
         </mat-card-content>

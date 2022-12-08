@@ -49,10 +49,6 @@ export class KlimatechnikaComponent implements OnInit {
     })
   };
 
-  //mycaraousel
-  getpic(pic:kep) {
-    return pic.high=="istenfaszaverjebele" ? '../../assets/img/sad.png' : pic.high
-  }
   //filter items
   filterItem(r:number){
     r-=12;

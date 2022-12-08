@@ -9,16 +9,16 @@ import { ErrorComponent } from './error/error.component';
 import { KapcsolatComponent } from './kapcsolat/kapcsolat.component';
 import { KlimatechnikaComponent } from './klimatechnika/klimatechnika.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
-
 import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from "@angular/material/icon";
 
 import { CookieService } from 'ngx-cookie-service';
-import { FooterComponent } from './footer/footer.component';
-import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [

@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit, SimpleChange, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, SimpleChange, ViewChild} from '@angular/core';
 import { PagecolorService } from  '../pagecolor.service'
 import {NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs";
@@ -37,15 +37,16 @@ export class NavbarComponent implements OnInit {
   //slider object
   @ViewChild('matslider') slider: any;
 
-  //kattintás event
+  //click event
   @Input() data: any;
 
-  //navcuccok
+  //Navbar scroll animation
   navbarfixed:boolean = false;
-  @ViewChild('toppic')toppic: any; //Elementreffet nemértem :(
+  @ViewChild('toppic')toppic?: ElementRef;
   height:number=10;
+
   @HostListener('window:scroll',['$event']) onscroll(){
-    this.height = this.toppic.nativeElement.offsetHeight * 0.7
+    this.height = this.toppic?.nativeElement.offsetHeight * 0.7
     if(window.scrollY > this.height)
     {
       this.navbarfixed = true;
@@ -56,7 +57,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  //responsive cuccok
+  //Responsive, small device
   navbarOpen = false;
   klima = false
   toggletime = false;
@@ -67,7 +68,7 @@ export class NavbarComponent implements OnInit {
     },0)
   }
 
-  //navbar és klíma slider interaktív eseménykezelés
+  //onclick event from input
   ngOnChanges() {
     this.closeToggle()
   }
@@ -116,7 +117,7 @@ export class NavbarComponent implements OnInit {
     }
 }
 
-  //klima/szin cuccok
+  //Color settings
   setColor(value:number){
     this.colorService.setColor(value)
   }
