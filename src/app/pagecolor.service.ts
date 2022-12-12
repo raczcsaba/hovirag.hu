@@ -8,13 +8,13 @@ const colors:string[] = ['zero','one','two','three','four','five','six','seven',
   providedIn: 'root'
 })
 
-
 export class PagecolorService {
-  private messageSource = new BehaviorSubject(1);
-  currentMessage = this.messageSource.asObservable();
 
   constructor(private cookieService: CookieService) { }
-  colorValue:number = 23;
+
+  colorValue = 23;
+  private messageSource = new BehaviorSubject(1);
+  currentMessage = this.messageSource.asObservable();
 
   start(){
     if (this.cookieService.check('color')){
@@ -22,9 +22,10 @@ export class PagecolorService {
     }
     this.changeMessage(this.colorValue)
   }
-  getSlider(){
-    return this.colorValue;
-  }
+
+  //1 = basic colors
+  //2 = inverse colors
+  //0 or other = normal colors
   getColor(param?:number) {
     switch (param) {
       case 1:
@@ -40,10 +41,10 @@ export class PagecolorService {
 
   setColor(color:number) {
     this.changeMessage(color)
-
     this.cookieService.set('color',color+'');
     this.colorValue = color;
   }
+
   changeMessage(message: number) {
     this.messageSource.next(message)
   }

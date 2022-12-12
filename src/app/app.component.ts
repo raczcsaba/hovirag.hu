@@ -9,12 +9,12 @@ import { PagecolorService } from  './pagecolor.service'
 
 export class AppComponent implements OnInit{
 
-  constructor(public colorservice:PagecolorService) {
-  }
+  constructor(public colorservice:PagecolorService) {}
+
   title = 'hovirag';
+
   pic:string = "";
-  public click: Object | undefined
-  munka?:string
+  public click = true
 
   ngOnInit() {
     this.colorservice.currentMessage.subscribe(message =>{
@@ -24,7 +24,6 @@ export class AppComponent implements OnInit{
     setTimeout(() => {
       this.pic = this.getbg(this.colorservice.colorValue);
     },0)
-
   }
 
   clickEvent(){
@@ -37,5 +36,4 @@ export class AppComponent implements OnInit{
     }
     return "url('../../assets/img/bgcold.png')"
   }
-
 }

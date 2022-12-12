@@ -5,8 +5,9 @@ export interface data {
   category: string,
   pictures: kep[] | undefined
 }
+
 export interface kep {
-  alt?:string,
+  alt:string,
   high:string
 }
 
@@ -18,7 +19,6 @@ export interface main {
   kep:string,
   alt:string,
   motto:string
-
 }
 
 export interface contact {
@@ -30,5 +30,4 @@ export interface contact {
   alt:string,
   kep:string,
   licencek:string
-
 }
