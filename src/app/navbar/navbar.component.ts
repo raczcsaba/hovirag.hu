@@ -21,10 +21,14 @@ export class NavbarComponent implements OnInit {
     {url: '/energetikai', title: 'Energetikai Tanusítás'},
     {url: '/munkak', title: 'Hűtéstechnika'},
     {url: '/munkak', title: 'Klímatechnika'},
+    {url: '/munkak', title: 'Hőszivattyú'},
     {url: '/kapcsolat', title: 'Kapcsolat'},
   ]
+  toggleNavLinks = false
   colors: string[] = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree'];
   activeUrl?:string;
+  acmode = "acauto.png"
+  selected = 'option1';
 
   constructor(public colorService: PagecolorService,private router: Router) {
     router.events.pipe(
@@ -131,9 +135,9 @@ export class NavbarComponent implements OnInit {
 
   getOppacity(value: number,i:number) {
     switch (this.activeUrl){
-      case "/":return i==4? 30 : 0
+      case "/":return i==5? 30 : 0
       case "/energetikai":return i==0? 30 : 0
-      case "/kapcsolat":return i==3? 30 : 0
+      case "/kapcsolat":return i==4? 30 : 0
       case "/munkak":
         if (i==2){
           return value>33 ? 99 : value <= 17 ? 0 : (value - 11) * 4;
@@ -141,15 +145,51 @@ export class NavbarComponent implements OnInit {
         else if (i==1){
           return value<13 ? 99 : value > 29 ? 0 : (35 - value) * 4;
         }
+        else if (i==6) {
+          return 30;
+        }
         else {
-          return 0;
+          return 0
         }
       default: return 0
     }
   }
 
   getColor(i: number) {
-    return i==2?'rgba(255, 69, 0,0.':i==1?'rgb(95, 158, 160,0.':'rgba(254,254,254,0.';
+    return i == 2 ? 'rgba(255, 69, 0,0.' : i == 1 ? 'rgb(95, 158, 160,0.' : 'rgba(254,254,254,0.';
   }
 
+  selectMunka(number: number) {
+    if (number == 0){
+      this.acmode='acauto.png'
+    }
+    else if (number == 1){
+      this.acmode='acheat.png'
+    }else {
+      this.acmode='accool.png'
+      this.setSlider(number==2?2:1)
+    }
+  }
+
+  changeMode() {
+    if (this.acmode == "acheat.png"){
+      this.acmode = "acauto.png"
+      this.slider.value = 26;
+      this.setColor(26)
+
+      this.selected = "option1"
+    }else if (this.acmode == "acauto.png"){
+      this.selected = "option3"
+      this.slider.value = 12;
+      this.setColor(12)
+
+      this.acmode = "accool.png"
+    }else {
+      this.selected = "option2"
+      this.slider.value = 26;
+      this.setColor(26)
+
+      this.acmode = "acheat.png"
+    }
+  }
 }

@@ -50,8 +50,11 @@ export class KlimatechnikaComponent implements OnInit {
   };
 
   //filter items
+
   filterItem(r:number){
     r-=12;
+    console.log("hmm " + r)
+
     this.filtered = [];
     let indexk = 0;
     let indexh = 0;
@@ -73,7 +76,7 @@ export class KlimatechnikaComponent implements OnInit {
     } else{
       let h = this.hutes.length >= 22-r ? 22-r : this.hutes.length;
       this.mydata.forEach(val => {
-        if (val.category=="klimatechnika"||val.category=="reklam"){
+        if (val.category=="klimatechnika"||val.category=="szakszervíz"){
           this.filtered.push(val)
         }else if (indexh<h){
           this.filtered.push(val)

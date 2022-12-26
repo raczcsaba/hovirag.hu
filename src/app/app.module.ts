@@ -19,6 +19,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from "@angular/material/icon";
 
 import { CookieService } from 'ngx-cookie-service';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CookieService } from 'ngx-cookie-service';
     MatSliderModule,
     MatCardModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

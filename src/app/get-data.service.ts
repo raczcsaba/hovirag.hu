@@ -11,8 +11,9 @@ export class GetDataService {
 
   constructor() { }
 
-  url:string = "http://localhost:1337";
-  rickroll:boolean = false
+  url:string = "http://95.138.193.252:32018";
+  rickroll:boolean = false;
+  munka:number = 0
 
   getData(api:string):Promise<AxiosResponse>{
     return axios.get(this.url+api)
@@ -37,7 +38,7 @@ export class GetDataService {
   sortKepek(dat:kepItem[]){
     let kepek:kep[] = []
     if(!dat){
-      dat = [{id:1,attributes:{url:'/uploads/sad_1dbace37ef.png',alternativeText:'noimg'}}];
+      dat = [{id:1,attributes:{url:'/uploads/sad_e74e398710.png',alternativeText:'noimg'}}];
     }
     dat.forEach((k:kepItem) => {
       kepek.push({
