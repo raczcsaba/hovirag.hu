@@ -53,7 +53,6 @@ export class KlimatechnikaComponent implements OnInit {
 
   filterItem(r:number){
     r-=12;
-    console.log("hmm " + r)
 
     this.filtered = [];
     let indexk = 0;

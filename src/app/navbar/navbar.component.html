@@ -17,16 +17,19 @@
              style="padding: 0"
              class="focus">
           <mat-form-field appearance="legacy"
-                          style="margin: 0 10px!important; padding: 0!important; height: 40px!important;">
-            <mat-select [(value)]="selected">
-              <mat-option (click)="selectMunka(0)" value="option1">Munkáim</mat-option>
-              <mat-option (click)="selectMunka(1)" value="option2">Hőszivattyú</mat-option>
+                          style="margin: 0 10px!important; padding: 0!important; height: 40px!important;"
+                          class="munkadropdown">
+            <mat-select [(value)]="selected" class="munkadropdown" style="background: none!important;">
+              <mat-option class="munkaItem" (click)="selectMunka(0)" value="option1">Munkáim</mat-option>
+              <mat-option  class="munkaItem"  (click)="selectMunka(1)" value="option2">Hőszivattyú</mat-option>
               <mat-option
+                class="munkaItem"
                 (click)="selectMunka(2)"
                 value="option3"
                 [ngStyle]="{'background-color': getColor(2)+getOppacity(matslider.value,2)+')'}">
                 Klímatechnika</mat-option>
               <mat-option
+                class="munkaItem"
                 (click)="selectMunka(3)"
                 [ngStyle]="{'background-color': getColor(1)+getOppacity(matslider.value,1)+')'}"
                 value="option4">Hűtéstechnika</mat-option>
@@ -44,7 +47,13 @@
       </div>
       <div [ngClass]="navbarOpen?['rollbarshow',colorService.getColor()]:'rollbar'">
         <div [ngClass]="colorService.getColor()" class="rollbaritem" routerLink="">Főoldal</div>
-        <div [ngClass]="colorService.getColor()" (click)="setSlider(i)" class="rollbaritem" routerLink="{{nav.url}}" *ngFor="let nav of LINKS, index as i">{{nav.title}}</div>
+        <div [ngClass]="colorService.getColor()"
+             (click)="i==0||i==4?'':selectMunka(i)"
+             class="rollbaritem"
+             routerLink="{{nav.url}}"
+             *ngFor="let nav of LINKS, index as i">
+          {{nav.title}}
+        </div>
       </div>
       <img  (click)="clima()" src="../../assets/img/klima.png" height="87px" style="padding: 0!important; margin-left: auto;">
       <p (click)="clima()" class="homero">{{matslider.value}}</p>

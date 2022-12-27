@@ -19,9 +19,9 @@ export class NavbarComponent implements OnInit {
 
   LINKS: navbar[] = [
     {url: '/energetikai', title: 'Energetikai Tanusítás'},
-    {url: '/munkak', title: 'Hűtéstechnika'},
-    {url: '/munkak', title: 'Klímatechnika'},
     {url: '/munkak', title: 'Hőszivattyú'},
+    {url: '/munkak', title: 'Klímatechnika'},
+    {url: '/munkak', title: 'Hűtéstechnika'},
     {url: '/kapcsolat', title: 'Kapcsolat'},
   ]
   toggleNavLinks = false
@@ -124,13 +124,16 @@ export class NavbarComponent implements OnInit {
   //Color settings
   setColor(value:number){
     this.colorService.setColor(value)
-  }
-
-  getbg(value: number) {
-    if(value>20){
-      return 'url("../../assets/img/bghot.png")'
+    if (value==12){
+      this.selected = 'option4'
+      this.acmode="accool.png"
+    }else if (value==34){
+      this.selected = 'option3'
+      this.acmode="accool.png"
+    }else{
+      this.acmode = 'acauto.png'
+      this.selected = 'option1'
     }
-    return "url('../../assets/img/bgcold.png')"
   }
 
   getOppacity(value: number,i:number) {
@@ -162,6 +165,8 @@ export class NavbarComponent implements OnInit {
   selectMunka(number: number) {
     if (number == 0){
       this.acmode='acauto.png'
+      this.slider.value = 26
+      this.setColor(26);
     }
     else if (number == 1){
       this.acmode='acheat.png'
@@ -185,10 +190,9 @@ export class NavbarComponent implements OnInit {
 
       this.acmode = "accool.png"
     }else {
-      this.selected = "option2"
       this.slider.value = 26;
       this.setColor(26)
-
+      this.selected = "option2"
       this.acmode = "acheat.png"
     }
   }
