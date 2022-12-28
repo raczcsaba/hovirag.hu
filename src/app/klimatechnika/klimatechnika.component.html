@@ -1,3 +1,23 @@
+<div (window:resize)="onResize($event)" class="cont" style="width: 100%">
+  <div class="item" *ngIf="actualPromo">
+    <mat-card class="mycard"
+              style="width: 90%;margin: 0 auto;"
+              [ngClass]="colorservice.getColor(1)">
+      <mat-card-content class="cardcont">
+        <mat-card-title>{{actualPromo.title}}</mat-card-title>
+        <div style="display: flex; gap: 10px">
+          <p class="carddescrip">
+            {{actualPromo.description}}
+          </p>
+          <div>
+            <img (click)="select(actualPromo,i)" *ngFor="let pic of actualPromo.pictures, index as i" class="img" [src]="pic.high" [alt]="pic.alt">
+            <button (click)="select(actualPromo,0)" *ngIf="(actualPromo.pictures?.length??0)>1" class="more"><mat-icon>fullscreen</mat-icon></button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
 <div class="body">
   <div class="cont smallview">
     <div *ngFor="let data of filtered; let even=even" class="item" [ngClass]="even==true?'':'hide'">
@@ -7,9 +27,9 @@
           <p class="carddescrip">
             {{data.description}}
           </p>
-          <div (click)="select(data)">
-            <img *ngFor="let pic of data.pictures" class="img" [src]="pic.high" [alt]="pic.alt">
-            <button class="more"><mat-icon>fullscreen</mat-icon></button>
+          <div>
+            <img (click)="select(data,i)" *ngFor="let pic of data.pictures, index as i" class="img" [src]="pic.high" [alt]="pic.alt">
+            <button (click)="select(data,0)" *ngIf="(data.pictures?.length??0)>1" class="more"><mat-icon>fullscreen</mat-icon></button>
           </div>
         </mat-card-content>
         <div class="chipcont">
@@ -28,9 +48,9 @@
           <p class="carddescrip">
             {{data.description}}
           </p>
-          <div (click)="select(data)">
-            <img *ngFor="let pic of data.pictures" class="img" [src]="pic.high" [alt]="pic.alt">
-            <button class="more"><mat-icon>fullscreen</mat-icon></button>
+          <div>
+            <img (click)="select(data,i)" *ngFor="let pic of data.pictures, index as i" class="img" [src]="pic.high" [alt]="pic.alt">
+            <button (click)="select(data,0)" *ngIf="(data.pictures?.length??0)>1" class="more"><mat-icon>fullscreen</mat-icon></button>
           </div>
         </mat-card-content>
         <div class="chipcont">
@@ -58,7 +78,7 @@
       <div class="modal-body" [ngClass]="colorservice.getColor()">
         <div class="bord">
           <button type="button" class="btn" (click)="prevPic()"><mat-icon>navigate_before</mat-icon></button>
-          <img class="modalimg" *ngFor="let pic of selected.pictures; index as i" [ngClass]="sIndex==i?'':'hidePic'" [src]="pic.high" [alt]="pic.alt">
+          <img [ngStyle]="{'max-height':screenHeight-100+'px'}" class="modalimg" *ngFor="let pic of selected.pictures; index as i" [ngClass]="sIndex==i?'':'hidePic'" [src]="pic.high" [alt]="pic.alt">
           <button type="button" class="btn" (click)="nextPic()"><mat-icon>navigate_next</mat-icon></button>
         </div>
       </div>

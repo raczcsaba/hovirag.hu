@@ -69,6 +69,23 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.slider.value = this.colorService.colorValue;
+      this.acmode = this.colorService.acMode;
+      switch (this.acmode){
+        case 'acheat.png':
+          this.selected = "option2"
+          return;
+        case 'accool.png':
+          if (this.slider.value==12){
+            this.selected="option4";
+          }
+          else{
+            this.selected="option3";
+          }
+          return;
+        case 'acauto.png':
+          this.selected = "option1"
+          return;
+      }
     },0)
   }
 
@@ -127,11 +144,15 @@ export class NavbarComponent implements OnInit {
     if (value==12){
       this.selected = 'option4'
       this.acmode="accool.png"
+      this.colorService.setAc(this.acmode)
     }else if (value==34){
       this.selected = 'option3'
       this.acmode="accool.png"
+      this.colorService.setAc(this.acmode)
     }else{
       this.acmode = 'acauto.png'
+      this.colorService.setAc(this.acmode)
+
       this.selected = 'option1'
     }
   }
@@ -165,13 +186,16 @@ export class NavbarComponent implements OnInit {
   selectMunka(number: number) {
     if (number == 0){
       this.acmode='acauto.png'
+      this.colorService.setAc(this.acmode)
       this.slider.value = 26
       this.setColor(26);
     }
     else if (number == 1){
       this.acmode='acheat.png'
+      this.colorService.setAc(this.acmode)
     }else {
       this.acmode='accool.png'
+      this.colorService.setAc(this.acmode)
       this.setSlider(number==2?2:1)
     }
   }
@@ -179,6 +203,7 @@ export class NavbarComponent implements OnInit {
   changeMode() {
     if (this.acmode == "acheat.png"){
       this.acmode = "acauto.png"
+      this.colorService.setAc(this.acmode)
       this.slider.value = 26;
       this.setColor(26)
 
@@ -187,13 +212,14 @@ export class NavbarComponent implements OnInit {
       this.selected = "option3"
       this.slider.value = 12;
       this.setColor(12)
-
       this.acmode = "accool.png"
+      this.colorService.setAc(this.acmode)
     }else {
       this.slider.value = 26;
       this.setColor(26)
       this.selected = "option2"
       this.acmode = "acheat.png"
+      this.colorService.setAc(this.acmode)
     }
   }
 }

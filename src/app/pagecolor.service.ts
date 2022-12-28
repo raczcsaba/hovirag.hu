@@ -13,14 +13,22 @@ export class PagecolorService {
   constructor(private cookieService: CookieService) { }
 
   colorValue = 23;
+  acMode = 'acauto.png'
+
   private messageSource = new BehaviorSubject(1);
   currentMessage = this.messageSource.asObservable();
+  private ACmessageSource = new BehaviorSubject('');
+  ACcurrentMessage = this.ACmessageSource.asObservable();
 
   start(){
     if (this.cookieService.check('color')){
       this.colorValue=Number(this.cookieService.get('color'));
     }
+    if (this.cookieService.check('acmode')){
+      this.acMode=this.cookieService.get('acmode');
+    }
     this.changeMessage(this.colorValue)
+    this.changeACMessage(this.acMode)
   }
 
   //1 = basic colors
@@ -45,7 +53,17 @@ export class PagecolorService {
     this.colorValue = color;
   }
 
+  setAc(mode:string) {
+    this.changeACMessage(mode)
+    this.cookieService.set('acmode',mode);
+    this.acMode = mode;
+  }
+
   changeMessage(message: number) {
     this.messageSource.next(message)
+  }
+
+  changeACMessage(message: string) {
+    this.ACmessageSource.next(message)
   }
 }

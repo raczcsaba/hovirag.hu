@@ -17,41 +17,60 @@ export class KlimatechnikaComponent implements OnInit {
   mydata: data[] = [];
   klima: data[] = [];
   hutes: data[] = [];
+  promo: data[] = []
+  gazsziv: data[] = []
   filtered: data[] = [];
   type:string = " "
   selected?: data;
+  actualPromo?: data;
   sIndex = 0;
   displayStyle = "none";
+  public screenHeight: number = 0;
+
 
   constructor(public dataservice:GetDataService, public colorservice:PagecolorService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataservice.getData('/api/munkaks?populate=*').then((dat) => {
-      this.mydata = this.dataservice.sortMunka(dat)
+      this.dataservice.sortMunka(dat).forEach(value => {
+        switch (value.category){
+          case 'hutestechnika':
+            this.mydata.push(value)
+            this.hutes.push(value);
+            return
+          case 'klimatechnika':
+            this.mydata.push(value)
+            this.klima.push(value)
+            return;
+          case 'hoszivattyu':
+            this.gazsziv.push(value);
+            return;
+          case 'szakszervíz':
+            this.promo.push(value);
+            return;
+        }
+      })
+      this.promo.sort((a, b) => {return a.id>b.id?1:-1})
       if (this.dataservice.rickroll){
         window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
       }
-      this.mydata.forEach(value => {
-        if (value.category=="hutestechnika"){
-          this.hutes.push(value)
-        }
-        else{
-          this.klima.push(value);
-        }
-      })
-      this.filterItem(this.colorservice.colorValue);
+      this.filterItem(this.colorservice.colorValue,this.colorservice.acMode);
     })
     .catch(error => {
       this.router.navigate(['/', 'error']);
     })
+    this.screenHeight = window.innerHeight
     this.colorservice.currentMessage.subscribe(message =>{
-      this.filterItem(message)
+      this.filterItem(message,this.colorservice.acMode)
+    })
+    this.colorservice.ACcurrentMessage.subscribe(message => {
+      this.filterItem(this.colorservice.colorValue, message)
     })
   };
 
   //filter items
 
-  filterItem(r:number){
+  filterMix(r:number){
     r-=12;
 
     this.filtered = [];
@@ -63,6 +82,7 @@ export class KlimatechnikaComponent implements OnInit {
       });
     }
     else if (r<11){
+      this.actualPromo = this.promo[2]
       let h = this.klima.length >= r ? r : this.klima.length;
       this.mydata.forEach(val => {
         if (val.category=="hutestechnika"){
@@ -73,9 +93,10 @@ export class KlimatechnikaComponent implements OnInit {
         }
       });
     } else{
+      this.actualPromo = this.promo[0]
       let h = this.hutes.length >= 22-r ? 22-r : this.hutes.length;
       this.mydata.forEach(val => {
-        if (val.category=="klimatechnika"||val.category=="szakszervíz"){
+        if (val.category=="klimatechnika"){
           this.filtered.push(val)
         }else if (indexh<h){
           this.filtered.push(val)
@@ -83,7 +104,33 @@ export class KlimatechnikaComponent implements OnInit {
         }
       });
     }
+  }
 
+  filterItem(r:number,mode:string){
+    this.filtered = []
+    switch (mode){
+      case 'acheat.png':
+        this.actualPromo = this.promo[1];
+        this.gazsziv.forEach(val => {
+          this.filtered.push(val);
+        })
+        this.filtered.sort((a, b) => {return a.id>b.id?1:-1})
+        return;
+      case 'accool.png':
+        this.filterMix(r);
+        this.filtered.sort((a, b) => {return a.id>b.id?1:-1})
+        return;
+      case 'acauto.png':
+        this.filterMix(r)
+        this.actualPromo = this.promo[3]
+        this.gazsziv.forEach(val => {
+          this.filtered.push(val);
+        })
+        this.filtered.sort((a, b) => {return a.id>b.id?1:-1})
+        return;
+    }
+    console.log(this.filtered)
+    this.filtered.sort((a, b) => {return a.id>b.id?1:-1})
   }
 
   //modal
@@ -96,10 +143,12 @@ export class KlimatechnikaComponent implements OnInit {
     this.displayStyle = "none";
   }
 
-  select(dat:data) {
-    this.selected = dat;
-    this.sIndex = 0;
-    this.openPopup()
+  select(dat:data,i:number) {
+    if (dat.pictures?.[0].high != 'http://95.138.193.252:32018/uploads/sad_e74e398710.png'){
+      this.selected = dat;
+      this.sIndex = i;
+      this.openPopup()
+    }
   }
 
   nextPic() {
@@ -110,5 +159,9 @@ export class KlimatechnikaComponent implements OnInit {
   prevPic() {
     let l = this.selected?this.selected.pictures?this.selected.pictures.length:0:0
     this.sIndex -= this.sIndex > 0 ? 1 : -l + 1
+  }
+
+  onResize($event: any) {
+    this.screenHeight = window.innerHeight
   }
 }
