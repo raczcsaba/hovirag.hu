@@ -62,6 +62,7 @@ export class NavbarComponent implements OnInit {
   toggletime = false;
 
   ngOnInit(): void {
+    this.navSet()
     setTimeout(() => {
       this.slider.value = this.colorService.colorValue;
       this.acmode = this.colorService.acMode;
@@ -82,14 +83,46 @@ export class NavbarComponent implements OnInit {
           return;
       }
     },0)
-    setTimeout(() => {
-      this.LINKS = this.dataService.LINKS
-    },10)
   }
 
   //onclick event from input
   ngOnChanges() {
     this.closeToggle()
+  }
+
+
+  navSet(){
+    this.dataService.getData("/api/fooldals").then(value => {
+      let length = this.dataService.getLength(value)
+      if (length>2){
+        this.LINKS = [
+          {url: '/page1', title: value.data.data?.[1].attributes.navcim},
+          {url: '/page2', title: value.data.data?.[2].attributes.navcim},
+          {url: '/munkak', title: 'Hőszivattyú'},
+          {url: '/munkak', title: 'Klímatechnika'},
+          {url: '/munkak', title: 'Hűtéstechnika'},
+          {url: '/kapcsolat', title: 'Kapcsolat'},
+        ]
+      }
+      else if (length>1){
+        this.LINKS = [
+          {url: '/page1', title: value.data.data?.[1].attributes.navcim},
+          {url: '/munkak', title: 'Hőszivattyú'},
+          {url: '/munkak', title: 'Klímatechnika'},
+          {url: '/munkak', title: 'Hűtéstechnika'},
+          {url: '/kapcsolat', title: 'Kapcsolat'},
+        ]
+
+      }
+      else if (length == 1){
+        this.LINKS = [
+          {url: '/munkak', title: 'Hőszivattyú'},
+          {url: '/munkak', title: 'Klímatechnika'},
+          {url: '/munkak', title: 'Hűtéstechnika'},
+          {url: '/kapcsolat', title: 'Kapcsolat'},
+        ]
+      }
+    })
   }
 
   toggleNavbar() {

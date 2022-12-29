@@ -28,39 +28,6 @@ export class GetDataService {
     return axios.get(this.url+api)
   }
 
-  navSet(){
-    this.getData("/api/fooldals").then(value => {
-      let length = this.getLength(value)
-      if (length>2){
-        this.LINKS = [
-          {url: '/page1', title: value.data.data?.[1].attributes.navcim},
-          {url: '/page2', title: value.data.data?.[2].attributes.navcim},
-          {url: '/munkak', title: 'Hőszivattyú'},
-          {url: '/munkak', title: 'Klímatechnika'},
-          {url: '/munkak', title: 'Hűtéstechnika'},
-          {url: '/kapcsolat', title: 'Kapcsolat'},
-        ]
-      }
-      else if (length>1){
-        this.LINKS = [
-          {url: '/page1', title: value.data.data?.[1].attributes.navcim},
-          {url: '/munkak', title: 'Hőszivattyú'},
-          {url: '/munkak', title: 'Klímatechnika'},
-          {url: '/munkak', title: 'Hűtéstechnika'},
-          {url: '/kapcsolat', title: 'Kapcsolat'},
-        ]
-      }
-      else if (length == 1){
-        this.LINKS = [
-          {url: '/munkak', title: 'Hőszivattyú'},
-          {url: '/munkak', title: 'Klímatechnika'},
-          {url: '/munkak', title: 'Hűtéstechnika'},
-          {url: '/kapcsolat', title: 'Kapcsolat'},
-        ]
-      }
-    })
-  }
-
   getLength(value:AxiosResponse){
     return value.data.meta.pagination.total;
   }
