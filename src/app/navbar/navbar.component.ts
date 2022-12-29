@@ -2,6 +2,7 @@ import {Component, ElementRef, HostListener, Input, OnInit, SimpleChange, ViewCh
 import { PagecolorService } from  '../pagecolor.service'
 import {NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs";
+import {GetDataService} from "../get-data.service";
 
 interface navbar {
   url: string;
@@ -17,20 +18,14 @@ interface navbar {
 
 export class NavbarComponent implements OnInit {
 
-  LINKS: navbar[] = [
-    {url: '/energetikai', title: 'Energetikai Tanusítás'},
-    {url: '/munkak', title: 'Hőszivattyú'},
-    {url: '/munkak', title: 'Klímatechnika'},
-    {url: '/munkak', title: 'Hűtéstechnika'},
-    {url: '/kapcsolat', title: 'Kapcsolat'},
-  ]
+  LINKS: navbar[] = this.dataService.LINKS
   toggleNavLinks = false
   colors: string[] = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone', 'twentytwo', 'twentythree'];
   activeUrl?:string;
   acmode = "acauto.png"
   selected = 'option1';
 
-  constructor(public colorService: PagecolorService,private router: Router) {
+  constructor(public colorService: PagecolorService,private router: Router, private dataService: GetDataService) {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -87,6 +82,9 @@ export class NavbarComponent implements OnInit {
           return;
       }
     },0)
+    setTimeout(() => {
+      this.LINKS = this.dataService.LINKS
+    },10)
   }
 
   //onclick event from input

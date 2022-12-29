@@ -6,9 +6,14 @@
         <img src="../../assets/img/logofel.png" height="87px">
       </button>
       <img [ngStyle]="{'background-color': getColor(5)+getOppacity(matslider.value,5)+')'}" src="../../assets/img/logofel.png" class="navibaritem" height="87px" style="padding: 0!important;" routerLink="">
-      <div class="navibaritem" routerLink="energetikai">
+      <div *ngIf="LINKS?.[0]?.url=='/page1'" class="navibaritem" routerLink="page1">
         <div [ngStyle]="{'background-color': getColor(0)+getOppacity(matslider.value,0)+')'}" class="focus">
-          Energetikai Tanusítás
+          {{LINKS?.[0]?.title}}
+        </div>
+      </div>
+      <div *ngIf="LINKS?.[1]?.url=='/page2'" class="navibaritem" routerLink="page2">
+        <div [ngStyle]="{'background-color': getColor(0)+getOppacity(matslider.value,0)+')'}" class="focus">
+          {{LINKS?.[1]?.title}}
         </div>
       </div>
 

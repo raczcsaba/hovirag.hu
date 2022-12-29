@@ -3,13 +3,22 @@ import axios, {AxiosResponse} from 'axios';
 import {data, main, kep, contact} from './datainterface'
 import { Item, kepItem } from './responseInterface'
 
+interface navbar {
+  url: string;
+  title: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 
+
 export class GetDataService {
 
   constructor() { }
+
+
+  LINKS: navbar[] = []
 
   url:string = "http://95.138.193.252:32018";
   rickroll:boolean = false;
@@ -17,6 +26,43 @@ export class GetDataService {
 
   getData(api:string):Promise<AxiosResponse>{
     return axios.get(this.url+api)
+  }
+
+  navSet(){
+    this.getData("/api/fooldals").then(value => {
+      let length = this.getLength(value)
+      if (length>2){
+        this.LINKS = [
+          {url: '/page1', title: value.data.data?.[1].attributes.navcim},
+          {url: '/page2', title: value.data.data?.[2].attributes.navcim},
+          {url: '/munkak', title: 'Hőszivattyú'},
+          {url: '/munkak', title: 'Klímatechnika'},
+          {url: '/munkak', title: 'Hűtéstechnika'},
+          {url: '/kapcsolat', title: 'Kapcsolat'},
+        ]
+      }
+      else if (length>1){
+        this.LINKS = [
+          {url: '/page1', title: value.data.data?.[1].attributes.navcim},
+          {url: '/munkak', title: 'Hőszivattyú'},
+          {url: '/munkak', title: 'Klímatechnika'},
+          {url: '/munkak', title: 'Hűtéstechnika'},
+          {url: '/kapcsolat', title: 'Kapcsolat'},
+        ]
+      }
+      else if (length == 1){
+        this.LINKS = [
+          {url: '/munkak', title: 'Hőszivattyú'},
+          {url: '/munkak', title: 'Klímatechnika'},
+          {url: '/munkak', title: 'Hűtéstechnika'},
+          {url: '/kapcsolat', title: 'Kapcsolat'},
+        ]
+      }
+    })
+  }
+
+  getLength(value:AxiosResponse){
+    return value.data.meta.pagination.total;
   }
 
   sortMunka(value:AxiosResponse){

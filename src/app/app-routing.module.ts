@@ -8,7 +8,8 @@ import {EnergetikaiComponent} from "./energetikai/energetikai.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'energetikai', component: EnergetikaiComponent },
+  { path: 'page1', component: EnergetikaiComponent, data:{info:"page1"}},
+  { path: 'page2', component: EnergetikaiComponent, data:{info:"page2"} },
   { path: 'munkak', component: KlimatechnikaComponent, data:{ info : "munkak" } },
   { path: 'kapcsolat', component: KapcsolatComponent },
   { path: 'error', component: ErrorComponent },

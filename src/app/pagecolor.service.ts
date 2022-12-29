@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import {BehaviorSubject } from "rxjs";
+import {GetDataService} from  "./get-data.service"
 
 const colors:string[] = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','twentyone','twentytwo','twentythree'];
 
@@ -10,7 +11,7 @@ const colors:string[] = ['zero','one','two','three','four','five','six','seven',
 
 export class PagecolorService {
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService,private dataService: GetDataService) { }
 
   colorValue = 23;
   acMode = 'acauto.png'
@@ -29,6 +30,7 @@ export class PagecolorService {
     }
     this.changeMessage(this.colorValue)
     this.changeACMessage(this.acMode)
+    this.dataService.navSet()
   }
 
   //1 = basic colors

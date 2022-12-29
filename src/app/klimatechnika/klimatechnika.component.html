@@ -1,5 +1,5 @@
-<div (window:resize)="onResize($event)" class="cont" style="width: 100%">
-  <div class="item" *ngIf="actualPromo">
+<div (window:resize)="onResize($event)" class="cont" style="width: 100%; padding: 0">
+  <div class="item" *ngIf="actualPromo" style="margin: 0; margin-top: 20px">
     <mat-card class="mycard"
               style="width: 90%;margin: 0 auto;"
               [ngClass]="colorservice.getColor(1)">
