@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosResponse} from 'axios';
 import {data, main, kep, contact} from './datainterface'
-import { Item, kepItem } from './responseInterface'
+import {Item, kepItem, pageObject} from './responseInterface'
 
 interface navbar {
   url: string;
@@ -62,15 +62,15 @@ export class GetDataService {
     return kepek;
   }
 
-  sortData(value:AxiosResponse){
+  sortData(value:pageObject){
       return  {
-        cim:value.data.data.attributes.cim,
-        leiras:value.data.data.attributes.leiras,
-        alcim:value.data.data.attributes.alcim,
-        altartalom:value.data.data.attributes.altartalom,
-        kep:value.data.data.attributes.kep.data.attributes.url,
-        alt:value.data.data.attributes.kep.data.attributes.alternativeText,
-        motto:value.data.data.attributes.rovidszoveg ?? " "
+        cim:value.attributes.cim,
+        leiras:value.attributes.leiras,
+        alcim:value.attributes.alcim,
+        altartalom:value.attributes.altartalom,
+        kep:value.attributes.kep.data.attributes.url,
+        alt:value.attributes.kep.data.attributes.alternativeText,
+        motto:value.attributes.rovidszoveg ?? " "
       };
   }
 

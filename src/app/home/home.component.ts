@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
   constructor(public colorService:PagecolorService, public dataservice: GetDataService, private router: Router) { }
 
   ngOnInit(): void {
-    this.dataservice.getData('/api/fooldals/1?populate=*').then((dat) => {
-      this.mydata = this.dataservice.sortData(dat)
+    this.dataservice.getData('/api/fooldals/?populate=*').then((dat) => {
+      this.mydata = this.dataservice.sortData(dat.data.data[0])
     })
     .catch(error => {
       this.router.navigate(['/', 'error']);

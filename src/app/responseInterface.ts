@@ -118,4 +118,68 @@
     data: Item[];
   }
 
+//custompageInterface
+  export interface Thumbnail {
+    name: string;
+    hash: string;
+    ext: string;
+    mime: string;
+    path?: any;
+    width: number;
+    height: number;
+    size: number;
+    url: string;
+  }
+
+  export interface Formats {
+    thumbnail: Thumbnail;
+  }
+
+  export interface Attributes2 {
+    name: string;
+    alternativeText: string;
+    caption: string;
+    width: number;
+    height: number;
+    formats: Formats;
+    hash: string;
+    ext: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl?: any;
+    provider: string;
+    provider_metadata?: any;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+
+  export interface kepData {
+    id: number;
+    attributes: Attributes2;
+  }
+
+  export interface Kep {
+    data: kepData;
+  }
+
+  export interface Attributes {
+    cim: string;
+    leiras: string;
+    alcim: string;
+    altartalom: string;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt: Date;
+    rovidszoveg: string;
+    navcim: string;
+    kep: Kep;
+  }
+
+  export interface pageObject {
+    id: number;
+    attributes: Attributes;
+  }
+
+
 

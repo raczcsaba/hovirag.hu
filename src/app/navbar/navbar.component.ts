@@ -191,7 +191,8 @@ export class NavbarComponent implements OnInit {
   getOppacity(value: number,i:number) {
     switch (this.activeUrl){
       case "/":return i==5? 30 : 0
-      case "/energetikai":return i==0? 30 : 0
+      case "/page1":return i==0? 30 : 0
+      case "/page2":return i==7? 30 : 0
       case "/kapcsolat":return i==4? 30 : 0
       case "/munkak":
         if (i==2){

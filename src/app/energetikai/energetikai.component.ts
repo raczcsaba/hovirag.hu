@@ -21,13 +21,12 @@ export class EnergetikaiComponent implements OnInit {
 
   ngOnInit(): void {
     this.sub = this.route.data.subscribe()
-    this.dataservice.getData(this.page=="page1"?'/api/fooldals/2?populate=*':'/api/fooldals/3?populate=*').then((dat) => {
-      this.mydata = this.dataservice.sortData(dat)
+    this.dataservice.getData('/api/fooldals/?populate=*').then((dat) => {
+      this.mydata = this.dataservice.sortData(dat.data.data[this.page=="page1"?1:2])
     })
-    .catch(error => {
-      this.router.navigate(['/', 'error']);
-    })
-
+      .catch(error => {
+        this.router.navigate(['/', 'error']);
+      })
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
