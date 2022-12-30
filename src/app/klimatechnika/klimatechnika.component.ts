@@ -52,7 +52,7 @@ export class KlimatechnikaComponent implements OnInit {
       })
       this.promo.sort((a, b) => {return a.id>b.id?1:-1})
       if (this.dataservice.rickroll){
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
+        console.log("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley")
       }
       this.filterItem(this.colorservice.colorValue,this.colorservice.acMode);
     })
@@ -129,7 +129,6 @@ export class KlimatechnikaComponent implements OnInit {
         this.filtered.sort((a, b) => {return a.id>b.id?1:-1})
         return;
     }
-    console.log(this.filtered)
     this.filtered.sort((a, b) => {return a.id>b.id?1:-1})
   }
 

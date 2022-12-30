@@ -33,7 +33,7 @@
           </div>
         </mat-card-content>
         <div class="chipcont">
-          <div class="chip" [ngClass]="colorservice.getColor()">
+          <div class="chip" *ngIf="data.category!=' '" [ngClass]="colorservice.getColor()">
             {{data.category}}
           </div>
         </div>
