@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
   height:number=10;
 
   @HostListener('window:scroll',['$event']) onscroll(){
-    this.height = this.toppic?.nativeElement.offsetHeight * 0.7
+    this.height = this.toppic?.nativeElement.offsetHeight * 0.3
     if(window.scrollY > this.height)
     {
       this.navbarfixed = true;

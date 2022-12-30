@@ -32,8 +32,8 @@ export class AppComponent implements OnInit{
 
   getbg(value: number) {
     if(value>20){
-      return 'url("../../assets/img/bghot.png")'
+      return 'url("../../assets/img/bgnewhot.jpg")'
     }
-    return "url('../../assets/img/bgcold.png')"
+    return "url('../../assets/img/bgnewcold.jpg')"
   }
 }
