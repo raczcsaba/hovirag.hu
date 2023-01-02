@@ -195,13 +195,13 @@ export class NavbarComponent implements OnInit {
       case "/page2":return i==7? 30 : 0
       case "/kapcsolat":return i==4? 30 : 0
       case "/munkak":
-        if (i==2){
+        if (i==2 && this.acmode!="acheat.png"){
           return value>33 ? 99 : value <= 17 ? 0 : (value - 11) * 4;
         }
-        else if (i==1){
+        else if (i==1 && this.acmode!="acheat.png"){
           return value<13 ? 99 : value > 29 ? 0 : (35 - value) * 4;
         }
-        else if (i==6) {
+        else if (i==6 && this.acmode=="acheat.png") {
           return 30;
         }
         else {

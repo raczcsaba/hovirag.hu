@@ -32,7 +32,7 @@
             <button (click)="select(data,0)" *ngIf="(data.pictures?.length??0)>1" class="more"><mat-icon>fullscreen</mat-icon></button>
           </div>
         </mat-card-content>
-        <div class="chipcont">
+        <div *ngIf="!oldal" class="chipcont">
           <div class="chip" *ngIf="data.category!=' '" [ngClass]="colorservice.getColor()">
             {{data.category}}
           </div>
@@ -53,7 +53,7 @@
             <button (click)="select(data,0)" *ngIf="(data.pictures?.length??0)>1" class="more"><mat-icon>fullscreen</mat-icon></button>
           </div>
         </mat-card-content>
-        <div class="chipcont">
+        <div *ngIf="!oldal" class="chipcont">
           <div class="chip" [ngClass]="colorservice.getColor()">
             {{data.category}}
           </div>

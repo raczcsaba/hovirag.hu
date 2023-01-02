@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { PagecolorService } from  './pagecolor.service'
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { PagecolorService } from  './pagecolor.service'
 
 export class AppComponent implements OnInit{
 
-  constructor(public colorservice:PagecolorService) {}
+  constructor(public colorservice:PagecolorService, private metaTagService: Meta) {}
 
   title = 'hovirag';
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { GetDataService } from  '../get-data.service'
 import {data, kep} from '../datainterface'
 import { PagecolorService } from  '../pagecolor.service'
@@ -26,35 +26,49 @@ export class KlimatechnikaComponent implements OnInit {
   sIndex = 0;
   displayStyle = "none";
   public screenHeight: number = 0;
+  @Input() oldal?: string;
+
 
 
   constructor(public dataservice:GetDataService, public colorservice:PagecolorService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataservice.getData('/api/munkaks?populate=*').then((dat) => {
-      this.dataservice.sortMunka(dat).forEach(value => {
-        switch (value.category){
-          case 'hutestechnika':
-            this.mydata.push(value)
-            this.hutes.push(value);
-            return
-          case 'klimatechnika':
-            this.mydata.push(value)
-            this.klima.push(value)
-            return;
-          case 'hoszivattyu':
-            this.gazsziv.push(value);
-            return;
-          case 'szakszervíz':
-            this.promo.push(value);
-            return;
-        }
-      })
-      this.promo.sort((a, b) => {return a.id>b.id?1:-1})
       if (this.dataservice.rickroll){
         console.log("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley")
       }
-      this.filterItem(this.colorservice.colorValue,this.colorservice.acMode);
+      if (!this.oldal){
+        this.dataservice.sortMunka(dat).forEach(value => {
+          switch (value.category){
+            case 'hutestechnika':
+              this.mydata.push(value)
+              this.hutes.push(value);
+              return
+            case 'klimatechnika':
+              this.mydata.push(value)
+              this.klima.push(value)
+              return;
+            case 'hoszivattyu':
+              this.gazsziv.push(value);
+              return;
+            case 'szakszervíz':
+              this.promo.push(value);
+              return;
+          }
+        })
+        this.promo.sort((a, b) => {return a.id>b.id?1:-1})
+        this.filterItem(this.colorservice.colorValue,this.colorservice.acMode);
+      }else {
+        this.dataservice.getData('/api/munkaks?populate=*').then((dat) => {
+          this.dataservice.sortMunka(dat).forEach(value => {
+            if (value.category == (this.oldal=="page1"?"oldal1":"oldal2")){
+              this.filtered.push(value)
+            }
+          })
+          this.filtered.sort((a, b) => {return a.id>b.id?1:-1})
+        })
+      }
+
     })
     .catch(error => {
       this.router.navigate(['/', 'error']);

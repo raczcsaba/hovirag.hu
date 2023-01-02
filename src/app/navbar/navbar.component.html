@@ -5,7 +5,12 @@
       <button class="navitoggler" (click)="toggleNavbar()" type="button">
         <img src="../../assets/img/logofel.png" height="87px">
       </button>
-      <img [ngStyle]="{'background-color': getColor(5)+getOppacity(matslider.value,5)+')'}" src="../../assets/img/logofel.png" class="navibaritem" height="87px" style="padding: 0!important;" routerLink="">
+
+      <div class="navibaritem" routerLink="">
+        <div [ngStyle]="{'background-color': getColor(5)+getOppacity(matslider.value,5)+')'}" class="focus">
+          <img src="../../assets/img/logofel.png" height="57px" style="margin: auto 0;padding: 0!important;" routerLink="">
+        </div>
+      </div>
       <div *ngIf="LINKS?.[0]?.url=='/page1'" class="navibaritem" routerLink="page1">
         <div [ngStyle]="{'background-color': getColor(0)+getOppacity(matslider.value,0)+')'}" class="focus">
           {{LINKS?.[0]?.title}}
@@ -17,33 +22,21 @@
         </div>
       </div>
 
-      <div class="navibaritem" #munka routerLink="munkak">
-        <div [ngStyle]="{'background-color': getColor(6)+getOppacity(matslider.value,6)+')'}"
-             style="padding: 0"
-             class="focus">
-          <mat-form-field appearance="legacy"
-                          style="margin: 0 10px!important; padding: 0!important; height: 40px!important;"
-                          class="munkadropdown">
-            <mat-select [(value)]="selected" class="munkadropdown" style="background: none!important;">
-              <mat-option class="munkaItem" (click)="selectMunka(0)" value="option1">Munkáim</mat-option>
-              <mat-option  class="munkaItem"  (click)="selectMunka(1)" value="option2">Hőszivattyú</mat-option>
-              <mat-option
-                class="munkaItem"
-                (click)="selectMunka(2)"
-                value="option3"
-                [ngStyle]="{'background-color': getColor(2)+getOppacity(matslider.value,2)+')'}">
-                Klímatechnika</mat-option>
-              <mat-option
-                class="munkaItem"
-                (click)="selectMunka(3)"
-                [ngStyle]="{'background-color': getColor(1)+getOppacity(matslider.value,1)+')'}"
-                value="option4">Hűtéstechnika</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <div class="navibaritem" routerLink="munkak" (click)="selectMunka(1)">
+        <div [ngStyle]="{'background-color': getColor(6)+getOppacity(matslider.value,6)+')'}" class="focus">
+          Hőszivattyú
         </div>
       </div>
-
-
+      <div class="navibaritem" routerLink="munkak" (click)="selectMunka(2)">
+        <div [ngStyle]="{'background-color': getColor(2)+getOppacity(matslider.value,2)+')'}" class="focus">
+          Klímatechnika
+        </div>
+      </div>
+      <div class="navibaritem" routerLink="munkak" (click)="selectMunka(3)">
+        <div [ngStyle]="{'background-color': getColor(1)+getOppacity(matslider.value,1)+')'}" class="focus">
+          Hűtéstechnika
+        </div>
+      </div>
 
       <div class="navibaritem" routerLink="kapcsolat">
         <div [ngStyle]="{'background-color': getColor(4)+getOppacity(matslider.value,4)+')'}" class="focus">

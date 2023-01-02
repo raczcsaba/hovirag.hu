@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { GetDataService } from  '../get-data.service'
-import { main } from '../datainterface'
+import {data, main} from '../datainterface'
 import { PagecolorService } from  '../pagecolor.service'
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
@@ -17,6 +17,7 @@ export class EnergetikaiComponent implements OnInit {
   page = ''
   sub:Subscription = this.route.data.subscribe(value => {this.page = value['info']})
 
+
   constructor(public colorService:PagecolorService, public dataservice: GetDataService, private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -24,9 +25,10 @@ export class EnergetikaiComponent implements OnInit {
     this.dataservice.getData('/api/fooldals/?populate=*').then((dat) => {
       this.mydata = this.dataservice.sortData(dat.data.data[this.page=="page1"?1:2])
     })
-      .catch(error => {
-        this.router.navigate(['/', 'error']);
-      })
+    .catch(error => {
+      this.router.navigate(['/', 'error']);
+    })
+
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
